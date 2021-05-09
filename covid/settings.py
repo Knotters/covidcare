@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'needs'
 ]
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
@@ -64,6 +65,16 @@ if not DEBUG:
                 'password': env.DBPASS,
                 'authMechanism': 'SCRAM-SHA-1'
             },
+        },
+        'super': {
+            'ENGINE': 'djongo',
+            'CLIENT': {
+                'name': env.SUPDBNAME,
+                'host': env.SUPDBLINK,
+                'username': env.SUPDBUSER,
+                'password': env.SUPDBPASS,
+                'authMechanism': 'SCRAM-SHA-1'
+            },
         }
     }
 else:
@@ -73,6 +84,13 @@ else:
             'NAME': env.DBNAME,
             'CLIENT': {
                 'host': env.DBLINK,
+            }
+        },
+        'super': {
+            'ENGINE': 'djongo',
+            'NAME': env.SUPDBNAME,
+            'CLIENT': {
+                'host': env.SUPDBLINK,
             }
         }
     }

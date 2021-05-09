@@ -1,0 +1,13 @@
+All leads for {{ need }}
+<br/><br/>
+{% for lead in leads %}
+    {{lead.provider}},<br/>
+    {{lead.location}},<br/>
+    {{lead.contact}}<br/>
+    Verified: {{lead.verified}}<br/>
+    {% if lead.verified %}
+        {{lead.lastverified}}
+    {% endif %}
+{% empty %}
+    No leads yet.
+{% endfor %}

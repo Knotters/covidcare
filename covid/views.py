@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from . import env
 
-def renderData(data={}):
+def renderData(request,view,data={}):
     data['appname'] = env.PUBNAME
-    return data
+    return render(request,view,data)
 
 def index(request):
-    return render(request,'index.html', renderData())
+    return renderData(request,'index.html')
