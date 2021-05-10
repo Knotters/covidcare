@@ -27,7 +27,7 @@ py manage.py migrate
 ### Server
 
 ```bash
-py manage.py runserver
+py manage.py runserver 5000
 ```
 
 or similar command depending on your system platform.
