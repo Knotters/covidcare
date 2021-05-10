@@ -3,11 +3,18 @@ from .renderer import renderView
 from .decorators import require_superlogin
 from django.contrib.sessions.models import Session
 
-from needs.models import NeedType
+from needs.models import NeedType, Lead
 
 def index(request):
     needs = NeedType.objects.all()
-    return renderView(request, 'index.html', { "needs": needs })
+    newneeds = []
+    i = 1
+    for need in needs:
+        if i < 8:
+            newneeds.append(need)
+        i+=1
+    totalproviders = Lead.objects.all().count()
+    return renderView(request, 'index.html', { "needs": newneeds, "totalproviders":totalproviders })
 
 @require_superlogin
 def private(request):    

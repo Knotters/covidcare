@@ -1,13 +1,69 @@
-All leads for {{ need }}
-<br/><br/>
-{% for lead in leads %}
-    {{lead.provider}},<br/>
-    {{lead.location}},<br/>
-    {{lead.contact}}<br/>
-    Verified: {{lead.verified}}<br/>
-    {% if lead.verified %}
-        {{lead.lastverified}}
-    {% endif %}
-{% empty %}
-    No leads yet.
-{% endfor %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Questrial&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'styles/index.css' %}"  rel="stylesheet">
+        <title>{{need | capfirst}} · {{appname}}</title>
+    </head>
+    <body>
+        <nav class="w3-row">
+            <a href="/needs" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
+            <span class="w3-left"><h3>{{need | capfirst}} providers</h3></span>
+            <span class="w3-right w3-row w3-padding">
+                <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
+                <button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button>
+            </span>
+        </nav>
+        <div class="w3-row sub-accent w3-padding">
+            <a href="/needs/{{need}}">
+            {% if not verified %}
+            <button class="positive">All</button>
+            {% else %}
+            <button class="primary">All</button>
+            {% endif %}
+            </a>
+            <a href="/needs/{{need}}?verified=1">
+            {% if verified %}
+            <button class="positive">Verified</button>
+            {% else %}
+            <button class="primary">Verified</button>
+            {% endif %}
+            </a>
+        </div>
+        <div class="w3-row w3-light-grey" style="padding-bottom: 22px;">
+            <br/>
+            {% for lead in leads %}
+                <div class="w3-col w3-quarter w3-padding">
+                    <div class="pallete primary">
+                        <h3>{{lead.provider}}</h3>
+                        <div class="w3-row">
+                            <button class="sub-accent"><i class="material-icons">call</i><a href="tel:{{lead.contact}}">{{lead.contact}}</a></button><br/>
+                            <button class="accent"><i class="material-icons">place</i><a target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/{{lead.location}}">{{lead.location}}</a></button><br/>
+                            {% if lead.verified %}
+                            <button class="positive"><i class="material-icons">verified</i>Verified</button><br/>
+                            <button class="primary"><i class="material-icons">history</i>{{lead.lastverified}}</button><br/>
+                            {% else %}
+                            <button class="negative" onclick="alert('Not verified yet. You can still try contacting.')"><i class="material-icons">warning</i>Unverified</button><br/>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <center class="w3-padding">
+                    <i class="w3-jumbo material-icons">error_outline</i>
+                    <h1>No {% if verified %} verified {% endif %} leads for {{need}} support yet.</h1>
+                    <h4>Please keep checking here, as the community is regularly updating resources.</h4>
+                    <h5>Meanwhile, please <a class="positive-text" href="/private">volunteer</a> if you are in the state to help others!</h5>
+                </center>
+            {% endfor %}
+        </div>
+    </body>
+</html>

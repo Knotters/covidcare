@@ -3,6 +3,7 @@
   --secondary: #000000;
   --accent: #f5d702;
   --sub-accent: #12e49d;
+  --positive: #1657ce;
   --negative: #cc352a;
   --head-font: "Poppins", sans-serif;
   --body-font: "Questrial", sans-serif;
@@ -10,6 +11,13 @@
 }
 a{
     text-decoration: none;
+    transition: var(--delay);
+}
+a:hover{
+    opacity: 0.8;
+}
+a:active{
+    opacity: 0.4;
 }
 body {
   background-color: var(--primary);
@@ -44,6 +52,13 @@ h5 {
 .negative {
   background-color: var(--negative) !important;
   color: var(--primary);
+}
+.positive {
+  background-color: var(--positive) !important;
+  color: var(--primary);
+}
+.positive-text {
+  color: var(--positive) !important;
 }
 
 .sub-accent {

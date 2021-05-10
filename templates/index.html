@@ -17,27 +17,37 @@
         <nav class="w3-row">
             <span class="w3-left w3-padding-small"><h3>{{appname}}</h3></span>
             <span class="w3-right w3-row w3-padding">
-                <a href="/"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
+                <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
                 <button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button>
             </span>
         </nav>
         <div class="w3-row w3-padding accent">
             <button class="primary">Vaccines now available for 18-44 age group</span>
+            <button class="primary">{{ totalproviders }} providers so far!</span>
         </div>
         <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">
             <br/>
             {% for need in needs %}
-            <div class="w3-col w3-quarter w3-padding">
-                <a href="/needs/{{need}}"><div class="pallete primary">
-                    <div class="w3-row material-icons w3-jumbo">
-                        {{need.icon}}
-                    </div>
-                    <h2>{{need.type | capfirst}}</h2>
-                    <span>{{need.about | capfirst}}</span>
+                <div class="w3-col w3-quarter w3-padding">
+                    <a href="/needs/{{need}}">
+                        <div class="pallete primary">
+                            <div class="w3-row material-icons w3-jumbo">
+                                {{need.icon}}
+                            </div>
+                            <h2>{{need.type | capfirst}}</h2>
+                            <span>{{need.about | capfirst}}</span>
+                        </div>
+                    </a>
                 </div>
-                </a>
-            </div>
             {% endfor %}
+            <div class="w3-col w3-quarter w3-padding">
+                    <a href="/needs/"><div class="pallete sub-accent">
+                        <div class="w3-row material-icons w3-jumbo">launch</div>
+                        <h2 >More services</h2>
+                        <span>Extra services you need which are not shown here.</span>
+                    </div>
+                    </a>
+                </div>
         </div>
         <div class="w3-row w3-padding w3-center">
             <br/>

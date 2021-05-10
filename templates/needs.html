@@ -1,7 +1,42 @@
-
-All needs categories
-<br/>
-
-{% for need in needs %}
-    <a href="{{need}}">{{need}}</a><br/>
-{% endfor %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Questrial&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'styles/index.css' %}"  rel="stylesheet">
+        <title>Services · {{appname}}</title>
+    </head>
+    <body>
+        <nav class="w3-row sub-accent">
+            <a href="/" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
+            <span class="w3-left"><h3>Services</h3></span>
+            <span class="w3-right w3-row w3-padding">
+                <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
+                <a href="/private"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
+            </span>
+        </nav>
+        <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">
+            <br/>
+            {% for need in needs %}
+                <div class="w3-col w3-quarter w3-padding">
+                    <a href="/needs/{{need}}">
+                        <div class="pallete primary">
+                            <div class="w3-row material-icons w3-jumbo">
+                                {{need.icon}}
+                            </div>
+                            <h2>{{need.type | capfirst}}</h2>
+                            <span>{{need.about | capfirst}}</span>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
