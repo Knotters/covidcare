@@ -5,5 +5,6 @@ from . import env, views
 urlpatterns = [
     path(env.ADMINPATH, admin.site.urls),
     path('', views.index),
-    path('needs/', include('needs.urls'))
+    path('needs/', include('needs.urls')),
+    path('private', views.private)
 ]

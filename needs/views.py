@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import redirect, render, HttpResponse
 from .models import NeedType, Lead
 
 def renderData(request,view,data={}):
@@ -19,5 +19,4 @@ def needs(request,need=None):
         return renderData(request, 'leads.html', { 'leads': resources, 'need': needobj })
     except:
         return HttpResponse("No such need")
-
 
