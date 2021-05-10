@@ -1,402 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>covid care</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/static/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="/static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/static/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/static/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="/static/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="/static/vendor/aos/aos.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
-
-  <link href="/static/style.css" rel="stylesheet">
-<style>
-body,
-        html {
-            height: 100%;
-           width: 100%;
-           
-        }
-        *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* style for flipping card starts here */
-
-.flipping-cards{
-    margin-top: -3rem;
-    padding: 2rem 0;
-    /*background-image: linear-gradient(to left bottom, #ffa41b, #ff5151);*/
-    font-family: 'Rubik', sans-serif;
-    margin-left:45px;
-}
-
-.flipping-card-wrapper{
-    padding: 2rem;
-    margin: 2rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: center;
-}
-
-.flipping-card-item-wrapper{
-    perspective: 150rem;
-    position: relative;
-    width:   290px;
-    height:  300px;
-    margin: 1rem;
-}
-
-.flipping-card-item-side{
-    position: absolute;
-    top: 0;
-    left: 0;
-    backface-visibility: hidden;
-    margin:  1.5rem;
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    background-color: #ffffff;
-    box-shadow: 0 .5rem .5rem rgba(0, 0, 0, 0.18);
-    transition: all 1s;
-}
-
-
-.flipping-card-item-side-back{
-    color: #000;
-    transform: rotateY(180deg);
-}
-
-
-.flipping-card-item-wrapper:hover .flipping-card-item-side-front{
-    transform: rotateY(-180deg);
-}
-
-.flipping-card-item-wrapper:hover .flipping-card-item-side-back{
-    transform: rotateY(0);
-}
-
-.flipping-card-item-img{
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-blend-mode: color;
-}
-
-.flipping-card-back-wrapper{
-    font-weight: 200;
-    position: relative;
-    top: 25%;
-    left: 0;
-    margin: 2rem;
-    text-align: center;
-}
-
-.flipping-card-back-wrapper__btn {
-    margin-top: 2rem;
-    padding: .7rem;
-    text-align: center;
-    color: #ffffff;
-    border: 0;
-    background-image: linear-gradient(to right bottom, #ffa41b, #ff5151);
-    transition: all .5s;
-}
-
-.flipping-card-back-wrapper__btn:hover {
-    background-image: none;
-    color: #ffa41b;
-    border: 1px solid #ffa41b;
-}
-
-.copyright{
-    font-size: 11px;
-    color: #ffffff;
-    text-align: center;
-}
-.boxed {
-  border: 1px solid black;
-  margin-top:-20px;
-  margin-left:30px;
-  margin-right:30px;
-  height:40px;
-  
-}
-div.ex1 {
-  background-color: lightblue;
-  width: 300px;
-  height: 250px;
-  overflow: scroll;
-  margin-top:95px;
-  margin-left:40px;
-  float:left
-}
-div.full-width {position:relative;float:left;width:100%;}
-@media screen
-and (min-width: 751px), screen and (min-device-width:751) {
-div.video {position:relative;float:left;padding:5px;width:30%;}
-iframe {width:100%;}
-}
-
-.accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: center;
-  outline: none;
-  font-size: 15px;
-  transition: 0.4s;
-}
-
-.activee, .accordion:hover {
-  background-color: #ccc; 
-}
-
-.panel {
-  padding: 0 18px;
-  display: none;
-  background-color: white;
-  overflow: hidden;
-}
-
-
-</style>
-</head>
-
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-
-      <!-- <h1 class="logo mr-auto"><a href="index.html">Kautukum</a></h1> -->
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="./index3.html" class="logo mr-auto"><img src="" alt="logo" class="img-fluid"></a>
-
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-          <li class="active"><a href="./index3.html">HOME</a></li>
-          <li><a href="./aboutus.html">ABOUT US</a></li>
-          <li><a href="#about">FAQ'S</a></li>
-          <!-- <li><a href="courses.html">Courses</a></li> -->
-          <!-- <li><a href="trainers.html">Trainers</a></li> -->
-          <!-- <li><a href="events.html">Events</a></li> -->
-          <!-- <li><a href="pricing.html">Pricing</a></li> -->
-          <li><a href="./blog page.html">VLOUNTEER</a></li>
-          <li ><a href="">LOGIN</a>
-          </li>
-
-        </ul>
-      </nav><!-- .nav-menu -->
-
-    </div>
-  </header><!-- End Header -->
-
-
-  
-    <marquee id='scroll_news' style="margin-left:30px;height:30px;margin-right:30px;background-color: black; margin-top:100px;font-family:Book Antiqua; color: #FFFFFF" bgcolor="#000080" ><div onMouseOver="document.getElementById('scroll_news').stop();" onMouseOut="document.getElementById('scroll_news').start();">News 1   News 2  News 3 News 4 ....... More news here </div></marquee>
- 
-    <section class="flipping-cards">
-        <div class="flipping-card-wrapper">
-            <div class="flipping-card-item-wrapper">
-                <div class="flipping-card-item-side flipping-card-item-side-front">
-                    <img src="https://images.hindustantimes.com/img/2021/04/04/550x309/20210403_MUM-PC-MN_Coronavirus_021_1617531280823_1617531320779.jpg" alt="" class="flipping-card-item-img">
-                </div>
-                <div class="flipping-card-item-side flipping-card-item-side-back">
-                    <div class="flipping-card-back-wrapper">
-                        <p>Hello I am learning how to create flipping cards using HTML & CSS, will you mind joining me?</p>
-                        <button class="flipping-card-back-wrapper__btn">Read More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flipping-card-item-wrapper">
-                <div class="flipping-card-item-side flipping-card-item-side-front">
-                    <img src="https://etimg.etb2bimg.com/photo/79282866.cms" alt="" class="flipping-card-item-img">
-                </div>
-                <div class="flipping-card-item-side flipping-card-item-side-back">
-                    <div class="flipping-card-back-wrapper">
-                        <p>Hello I am learning how to create flipping cards using HTML & CSS, will you mind joining me?</p>
-                        <button class="flipping-card-back-wrapper__btn">Read More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="flipping-card-item-wrapper">
-                <div class="flipping-card-item-side flipping-card-item-side-front">
-                    <img src="https://images.livemint.com/img/2020/09/11/600x338/PTI24-08-2020_000185B_1599825084112_1599825126457_1599825309656.jpg" alt="" class="flipping-card-item-img">
-                </div>
-                <div class="flipping-card-item-side flipping-card-item-side-back">
-                    <div class="flipping-card-back-wrapper">
-                        <p>Hello I am learning how to create flipping cards using HTML & CSS, will you mind joining me?</p>
-                        <button class="flipping-card-back-wrapper__btn">Read More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flipping-card-item-wrapper">
-                <div class="flipping-card-item-side flipping-card-item-side-front">
-                    <img src="https://images.news18.com/ibnlive/uploads/2021/05/1620363983_sputnik.jpg?impolicy=website&width=534&height=356" alt="" class="flipping-card-item-img">
-                </div>
-                <div class="flipping-card-item-side flipping-card-item-side-back">
-                    <div class="flipping-card-back-wrapper">
-                        <p>Hello I am learning how to create flipping cards using HTML & CSS, will you mind joining me?</p>
-                        <button class="flipping-card-back-wrapper__btn">Read More</button>
-                    </div>
-
-                </div>
-            </div>
+    <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Questrial&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'styles/index.css' %}"  rel="stylesheet">
+        <title>{{appname}}</title>
+    </head>
+    <body>
+        <nav class="w3-row">
+            <span class="w3-left w3-padding-small"><h3>{{appname}}</h3></span>
+            <span class="w3-right w3-row w3-padding">
+                <a href="/"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
+                <button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button>
+            </span>
+        </nav>
+        <div class="w3-row w3-padding accent">
+            <button class="primary">Vaccines now available for 18-44 age group</span>
         </div>
-    </section>
-    <section class="flipping-cards" style="margin-top:-100px;">
-        <div class="flipping-card-wrapper">
-            <div class="flipping-card-item-wrapper">
-                <div class="flipping-card-item-side flipping-card-item-side-front">
-                    <img src="https://images.news18.com/ibnlive/uploads/2021/05/1620363983_sputnik.jpg?impolicy=website&width=534&height=356" alt="" class="flipping-card-item-img">
-                </div>
-                <div class="flipping-card-item-side flipping-card-item-side-back">
-                    <div class="flipping-card-back-wrapper">
-                        <p>Hello I am learning how to create flipping cards using HTML & CSS, will you mind joining me?</p>
-                        <button class="flipping-card-back-wrapper__btn">Read More</button>
+        <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">
+            <br/>
+            {% for need in needs %}
+            <div class="w3-col w3-quarter w3-padding">
+                <a href="/needs/{{need}}"><div class="pallete primary">
+                    <div class="w3-row material-icons w3-jumbo">
+                        {{need.icon}}
                     </div>
+                    <h2>{{need.type | capfirst}}</h2>
+                    <span>{{need.about | capfirst}}</span>
                 </div>
+                </a>
             </div>
-
-            <div class="flipping-card-item-wrapper">
-                <div class="flipping-card-item-side flipping-card-item-side-front">
-                    <img src="https://www.doylestownhealth.org/~/media/doylestown-health/images/blogs/consultationwearingmasks.ashx?h=600&la=en&w=600" alt="" class="flipping-card-item-img">
-                </div>
-                <div class="flipping-card-item-side flipping-card-item-side-back">
-                    <div class="flipping-card-back-wrapper">
-                        <p>Hello I am learning how to create flipping cards using HTML & CSS, will you mind joining me?</p>
-                        <button class="flipping-card-back-wrapper__btn">Read More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="flipping-card-item-wrapper">
-                <div class="flipping-card-item-side flipping-card-item-side-front">
-                    <img src="https://img.etimg.com/thumb/width-640,height-480,imgsize-167667,resizemode-1,msid-74940912/industry/healthcare/biotech/healthcare/covid-19-private-labs-face-home-testing-hiccups/8.jpg" alt="" class="flipping-card-item-img">
-                </div>
-                <div class="flipping-card-item-side flipping-card-item-side-back">
-                    <div class="flipping-card-back-wrapper">
-                        <p>Hello I am learning how to create flipping cards using HTML & CSS, will you mind joining me?</p>
-                        <button class="flipping-card-back-wrapper__btn">Read More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flipping-card-item-wrapper">
-                <div class="flipping-card-item-side flipping-card-item-side-front">
-                    <img src="https://assets.vogue.in/photos/60893efd1bcb99bd6048e663/master/pass/Covid%20meal%20services.jpg" alt="" class="flipping-card-item-img">
-                </div>
-                <div class="flipping-card-item-side flipping-card-item-side-back">
-                    <div class="flipping-card-back-wrapper">
-                        <p>Hello I am learning how to create flipping cards using HTML & CSS, will you mind joining me?</p>
-                        <button class="flipping-card-back-wrapper__btn">Read More</button>
-                    </div>
-
-                </div>
-            </div>
+            {% endfor %}
         </div>
-    </section>
-
-    <div class="boxed" style="text-align: center;">
-        This text is enclosed in a box.
-      </div>
-
-
-      <h5 style="margin-left:40px;margin-top:40px;width:300px;border:1px solid black;margin-bottom: -94px;">what's new</h5>
-<div class="ex1">
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy 
-    nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</div>
-
-    <div style="width: 400px; float:left; height:250px; background:gray; margin:10px;margin-left:150px; margin-top: 75px;">
-        First DIV
+        <div class="w3-row w3-padding w3-center">
+            <br/>
+            <button class="negative"><i class="material-icons">call</i><a href="tel:108">Dial 108 for emergency</a></span>
+            <button class="sub-accent"><i class="material-icons">call</i><a href="tel:104">Dial 104 for covid drugs & oxygen</a></span>
         </div>
-        <div style="width: 400px; float:left; height:250px; background:gray; margin:10px;margin-left:100px;margin-top:75px;">
-            <iframe src="https://www.google.com/maps/d/embed?mid=1yxvXy78wkNoYdtKHYDCPu0lcFfgqB0yq" width="400" height="250"></iframe>
+        <div class="w3-row sub-accent">
+
         </div>
-
-
-
-        <div class="full-width" style="width:1500px;height:250px;margin-left:-300px;margin-top:60px;">
-            <div class="video" style="margin-right:50px ;"><iframe width="560" height="315" src="https://www.youtube.com/embed/NMLRzuFLosg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-            <div class="video" style="margin-right: 30px;"><iframe width="560" height="315" src="https://www.youtube.com/embed/1rLGbP20AUQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-            <div class="video"><iframe width="560" height="315" src="https://www.youtube.com/embed/jpMt6BbPLKI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-            </div>
-
-
-            <div>
-<button class="accordion" style="margin-top: 100px;">Section 1</button>
-<div class="panel" style="overflow: scroll;">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-
-<button class="accordion">Section 2</button>
-<div class="panel">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-
-<button class="accordion">Section 3</button>
-<div class="panel">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-</div>
-
-<script>
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
-}
-</script>
-
-
-  <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="/static/vendor/jquery/jquery.min.js"></script>
-  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="/static/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="/static/vendor/php-email-form/validate.js"></script>
-  <script src="/static/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="/static/vendor/counterup/counterup.min.js"></script>
-  <script src="/static/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="/static/vendor/aos/aos.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
-
-  <!-- Template Main JS File -->
-  <script src="/static/main.js"></script>
-
-</body>
-
-
+    </body>
 </html>

@@ -5,7 +5,8 @@ from datetime import datetime
 class NeedType(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.CharField(max_length=50)
-
+    about = models.CharField(max_length=100, default='Get help on this.')
+    icon = models.CharField(max_length=100,default='info')
     def __str__(self):
         return self.type
 
