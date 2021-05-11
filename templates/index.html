@@ -72,12 +72,9 @@ details > summary::-webkit-details-marker {
         </nav>
         <div class="w3-row w3-padding accent">
             
-          <button class="primary"></span>
-            <marquee id='scroll_news'><div onMouseOver="document.getElementById('scroll_news').stop();" onMouseOut="document.getElementById('scroll_news').start();"><span style="font-weight: 600;">Vaccines now available for 18-44 age group</div></marquee>
-
-          <button class="primary"></span>
-            <marquee id='scroll_news'><div onMouseOver="document.getElementById('scroll_news').stop();" onMouseOut="document.getElementById('scroll_news').start();"><span style="font-weight: 600;">{{ totalproviders }} providers so far!</div></marquee>
-
+          <marquee behaviour=alternate ><button class="primary" style="margin-right: 100px;"></span>Vaccines now available for 18-44 age group
+            <button class="primary"></span>{{ totalproviders }} providers so far!
+          </marquee>
         </div>
         <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">
             <br/>
