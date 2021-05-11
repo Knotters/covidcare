@@ -39,6 +39,9 @@ h5 {
   background-color: var(--primary) !important;
   color: var(--secondary);
 }
+.primary-text {
+  color: var(--primary) !important;
+}
 
 .secondary {
   background-color: var(--secondary) !important;
@@ -115,4 +118,41 @@ button:active{
 
 .scroll-x{
     overflow-x: scroll;
+}
+
+
+summary {
+  font-size: 1.25rem;
+  font-weight: 600;
+  background-color: #fff;
+  color: #333;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+  border-radius: 0.25rem;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  margin-top:40px;
+
+}
+details[open] summary ~ * {
+  animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+  0%    {opacity: 0; margin-top: -10px}
+  100%  {opacity: 1; margin-top: 0px}
+}
+details > summary::after {
+  position: absolute;
+  content: "+";
+  right: 50px;
+}
+details[open] > summary::after {
+  position: absolute;
+  content: "-";
+  right: 50px;
+}
+details > summary::-webkit-details-marker {
+  display: none;
 }

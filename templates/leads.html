@@ -13,7 +13,7 @@
         <link href="{% static 'styles/index.css' %}"  rel="stylesheet">
         <title>{{need | capfirst}} · {{appname}}</title>
     </head>
-    <body>
+    <body style="background:url('/media/{{need.image}}'); background-repeat:no-repeat; background-size:cover; background-opacity:0.6">
         <nav class="w3-row">
             <a href="/needs" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
             <span class="w3-left"><h3>{{need | capfirst}} providers</h3></span>

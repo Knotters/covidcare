@@ -12,55 +12,6 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{% static 'styles/index.css' %}"  rel="stylesheet">
         <title>{{appname}}</title>
-        <style>
-  
-h1 {
-  font-size: clamp(20px, 4vw, 30px);
-  line-height: 1.2;
-  margin-bottom: 40px;
-}
-main {
-  max-width: 520px;
-  margin: 0 auto;
-}
-summary {
-  font-size: 1.25rem;
-  font-weight: 600;
-  background-color: #fff;
-  color: #333;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  outline: none;
-  border-radius: 0.25rem;
-  text-align: left;
-  cursor: pointer;
-  position: relative;
-  margin-top:40px;
-  
-  
-}
-details[open] summary ~ * {
-  animation: sweep .5s ease-in-out;
-}
-@keyframes sweep {
-  0%    {opacity: 0; margin-top: -10px}
-  100%  {opacity: 1; margin-top: 0px}
-}
-details > summary::after {
-  position: absolute;
-  content: "+";
-  right: 50px;
-}
-details[open] > summary::after {
-  position: absolute;
-  content: "-";
-  right: 50px;
-}
-details > summary::-webkit-details-marker {
-  display: none;
-}
-
-        </style>
     </head>
     <body>
         <nav class="w3-row">
@@ -71,110 +22,105 @@ details > summary::-webkit-details-marker {
             </span>
         </nav>
         <div class="w3-row w3-padding accent">
-            
-          <marquee behaviour=alternate ><button class="primary" style="margin-right: 100px;"></span>Vaccines now available for 18-44 age group
-            <button class="primary"></span>{{ totalproviders }} providers so far!
+          <marquee behaviour=alternate>
+            {% for alert in alerts %}
+              <a target="_blank" rel="noreferrer" href="{{alert.link}}"><button class="primary">{{alert}}</button></a>
+            {% endfor %}
+              <button class="primary">{{ totalproviders }} providers so far!</button>
           </marquee>
         </div>
         <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">
             <br/>
             {% for need in needs %}
-                <div class="w3-col w3-quarter w3-padding">
-                    <a href="/needs/{{need}}">
-                        <div class="pallete primary">
-                            <div class="w3-row material-icons w3-jumbo">
-                                {{need.icon}}
-                            </div>
-                            <h2>{{need.type | capfirst}}</h2>
-                            <span>{{need.about | capfirst}}</span>
-                        </div>
-                    </a>
-                </div>
-
-                
+            <div class="w3-col w3-quarter w3-padding">
+                <a href="/needs/{{need}}">
+                    <div class="pallete primary">
+                        <img src="/media/{{need.image|safe}}" width="100"/>
+                        <h2>{{need.type | capfirst}}</h2>
+                        <span>{{need.about | capfirst}}</span>
+                    </div>
+                </a>
+            </div>                
             {% endfor %}
             <div class="w3-col w3-quarter w3-padding">
-                    <a href="/needs/"><div class="pallete sub-accent">
-                        <div class="w3-row material-icons w3-jumbo">launch</div>
+                <a href="/needs/">
+                    <div class="pallete sub-accent">
+                        <div class="w3-row material-icons" style="font-size:92px">launch</div>
                         <h2 >More services</h2>
                         <span>Extra services you need which are not shown here.</span>
                     </div>
-                    </a>
-                </div>
+                </a>
+            </div>
         </div>
-
-
-
-        
-
-
-        <div class="w3-container">
-
-
-            <div class="w3-border" style="border: 0px !important;;">
-              <div class="w3-container " style="background-color: #FFC0CB;border-radius: 20px;">
-                <div class="w3-row w3-padding w3-center">
-                <button class="negative" style="margin-right: 30px;"><i class="material-icons">call</i><a href="tel:108">Dial 108 for emergency</a></span>
-                    <button class="negative" style="margin-right: 30px;"><i class="material-icons">call</i><a href="tel:104">Any other issues contact 24 hours to contol room</a></span>
-                    <button class="negative" style="margin-right: 20px;"><i class="material-icons">call</i><a href="tel:104">Dial 104 for covid drugs & oxygen</a></span>
-                    </div>
-              </div>
-            </div>
-          </div>
-
-
-        
-            
-            
-            <div class="w3-row" style="margin-top: 40px;">
-                <div class="w3-third" style="background-color: lightblue;overflow: scroll;height:48vh;width:29vw;margin-right: 15px;margin-left: 35px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                     sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</div>
-              <div class="w3-third" style="margin-right: 15px;width:29vw">
-                <img src="https://image.shutterstock.com/image-photo/mountains-under-mist-morning-amazing-260nw-1725825019.jpg" alt="Name2" style="width:100%">
-              </div>
-              <div class="w3-third" style="width:29vw;">
-                <iframe src="https://www.google.com/maps/d/embed?mid=1yxvXy78wkNoYdtKHYDCPu0lcFfgqB0yq" style="width:100%;height:48vh;" ></iframe>
-              </div>
-            </div>
-            
-           
-
-            <div class="w3-row" style="margin-top: 40px;">
-                <div class="w3-third">
-
-                    <iframe style="width:90%;height:300px; margin-left: 20px;" src="https://www.youtube.com/embed/NMLRzuFLosg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-              <div class="w3-third">
-              <iframe style="width:95%;height:300px;" src="https://www.youtube.com/embed/1rLGbP20AUQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-              <div class="w3-third">
-                <iframe style="width:90%;height:300px;" src="https://www.youtube.com/embed/jpMt6BbPLKI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-
-            <details>
-                <summary style="color: black;margin-left:100px;">How I solve this issue?</summary>
-                <div class="faq__content" style="margin-left: 100px;">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor suscipit, iure tenetur eveniet, vero tempore delectus? Perferendis, quisquam ullam consequuntur?</p>
+        <br/>
+        <div class="w3-row w3-padding w3-center">
+            <button class="negative"><i class="material-icons">call</i><a href="tel:108">Dial 108 for emergency</a></button>
+            <button class="sub-accent"><i class="material-icons">call</i><a href="tel:104">Any other issues contact 24 hours to contol room</a></button>
+            <button class="positive"><i class="material-icons">call</i><a href="tel:104">Dial 104 for covid drugs & oxygen</a></button>
+        </div>
+        <br/>
+        <div class="w3-row">
+            <div class="w3-col w3-third w3-padding">
+                <div class="pallete accent" style="height: 44vh;">
+                    <center><h3>Latest</h3></center>
+                    <marquee direction="up" scrollamount="3" style="height: 30vh;" behaviour=alternate>
+                    {% for latest in latests %}
+                    {% if latest.link %}
+                    <a href="{{latest.link}}">
+                    {% endif %}
+                    <h4 class="w3-row">
+                        <li>{{latest.content}}</li>
+                    </h4>
+                    {% if latest.link %}
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                    </marquee>
                 </div>
-              </details>
-            
-                <details>
-                <summary style="color: black;margin-left: 100px;">How to input your data on this board?</summary>
-                <div class="faq__content" style="margin-left: 100px;">
-                  <p>Fugiat quo voluptas nulla pariatur? Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque. Accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
+            </div>
+            <div class="w3-col w3-third w3-padding">
+                <div class="pallete">
+                    <img src="https://image.shutterstock.com/image-photo/mountains-under-mist-morning-amazing-260nw-1725825019.jpg" alt="Name2" style="width:100%;">
                 </div>
-              </details>
-
-
-        
+            </div>
+            <div class="w3-col w3-third w3-padding">
+                <div class="pallete positive">
+                    <iframe src="https://www.google.com/maps/d/embed?mid=1yxvXy78wkNoYdtKHYDCPu0lcFfgqB0yq" style="width:100%;height:40vh;" ></iframe>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="w3-row sub-accent">
+            <br/>
+            <center><h1>Media Clips</h1></center>
+            {% for video in videos %}
+            <div class="w3-col w3-third w3-padding">
+                <iframe style="height:300px; width: 100%; border-radius: 12px;" src="{{video.link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="w3-row w3-light-grey w3-padding-small">
+            <br/>
+            <center><h1>Frequently Asked Questions</h1></center>
+            {% for faq in faqs %}
+            <details class="primary">
+                <summary><h2 class="positive-text">{{faq.question}}</h2></summary>
+                <div class="w3-padding">
+                   <h4>{{faq.answer}}</h4>
+                </div>
+            </details>
+            {% endfor %}
+        </div>
+        <footer class="w3-row secondary w3-padding" style="min-height: 40vh;">
+            <br/><br/>
+            <div class="w3-col w3-half primary-text w3-padding">
+                <a href="mailto:{{contactmail}}"><button class="primary"><i class="material-icons">mail</i>{{contactmail}}</button></a><br/><br/>
+                Twitter <a target="_blank" rel="noreferrer" href="https://twitter.com/knottersdotorg"><button class="w3-blue">knottersdotorg</button></a><br/><br/>
+                Instagram <a target="_blank" rel="noreferrer" href="https://instagram.com/knottersdotorg"><button class="w3-pink">knottersdotorg</button></a>
+            </div>
+            <div class="w3-col w3-half w3-padding-small">
+                <h2 class="primary-text w3-right">{{appname}} by <a href="{{superdom}}">Knotters Community</a>.</h3>
+            </div>
+        </footer>
     </body>
 </html>

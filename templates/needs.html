@@ -28,13 +28,7 @@
                 <div class="w3-col w3-quarter w3-padding">
                     <a href="/needs/{{need}}">
                         <div class="pallete primary">
-                            {% if need.imgsrc == None %}
-                            <div class="w3-row material-icons w3-jumbo">
-                                {{need.icon}}
-                            </div>
-                            {% else %}
-                            <img src="{{need.imgsrc|safe}}" width="100"/>
-                            {% endif %}
+                            <img src="/media/{{need.image|safe}}" width="100"/>
                             <h2>{{need.type | capfirst}}</h2>
                             <span>{{need.about | capfirst}}</span>
                         </div>
