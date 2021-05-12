@@ -8,5 +8,5 @@ urlpatterns = [
     path(env.ADMINPATH, admin.site.urls),
     path('', views.index),
     path('needs/', include('needs.urls')),
-    path('private', views.private)
+    path('volunteer', views.volunteer)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

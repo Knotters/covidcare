@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,36 +12,47 @@
         <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
         <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
         <link rel="stylesheet" href="{% static 'styles/index.css' %}">
-        <title>{{need | capfirst}} · {{appname}}</title>
+        <title>Volunteer · {{appname}}</title>
     </head>
-    <body style="background:url('/media/{{need.image}}'); background-repeat:no-repeat; background-size:cover; background-opacity:0.6">
+    <body>
         <nav class="w3-row primary">
             <a href="/needs" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
-            <span class="w3-left"><h3>{{need | capfirst}} providers</h3></span>
+            <span class="w3-left"><h3>{{appname}} Volunteer</h3></span>
             <span class="w3-right w3-row w3-padding">
                 <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
-                <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
+                <a href="{{superdom}}/accounts/logout"><button class="positive"><i class="material-icons">person</i>{{request.user}}</button></a>
             </span>
         </nav>
-        <div class="w3-row sub-accent w3-padding">
-            <a href="/needs/{{need}}">
-            {% if not verified %}
-            <button class="positive">All</button>
-            {% else %}
-            <button class="primary">All</button>
-            {% endif %}
-            </a>
-            <a href="/needs/{{need}}?verified=1">
-            {% if verified %}
-            <button class="positive">Verified</button>
-            {% else %}
-            <button class="primary">Verified</button>
-            {% endif %}
-            </a>
+        <div class="w3-row w3-center w3-padding">
+            <br/>
+            <i class="material-icons w3-jumbo positive-text">add_circle</i>
+            <i class="material-icons w3-jumbo accent-text">volunteer_activism</i>
+            <i class="material-icons w3-jumbo sub-accent-text">verified</i><br/>
+            <h4>During these hard times, it's people like you, who volunteer to help your community selflessly, make this world a better place.</h4>
+            <br/>
+        </div>
+        <div class="w3-row accent w3-padding">
+            <div class="w3-col w3-half w3-padding w3-center">
+                <div class="pallete primary">
+                    <div class="material-icons w3-jumbo positive-text">add_circle</div>
+                    <h3>Post a lead</h3>
+                    <h6>Any info from your locality regarding anything which could help others.</h6>
+                </div>
+            </div>
+            <div class="w3-col w3-half w3-padding w3-center">
+                <div class="pallete primary">
+                    <div class="material-icons w3-jumbo sub-accent-text">verified</div>
+                    <h3>Verify leads for us</h3>
+                    <h6>We have a total of {{totalunverified}} leads. You can help verify them!</h6>
+                </div>
+            </div>
+        </div>
+        <div class="w3-row accent w3-center w3-padding">
+            <h2>Thank you!</h2>
         </div>
         <div class="w3-row w3-light-grey" style="padding-bottom: 22px;">
             <br/>
-            {% for lead in leads %}
+            {% for volunteer in volunteers %}
                 <div class="w3-col w3-quarter w3-padding">
                     <div class="pallete primary">
                         <h3>{{lead.provider}}</h3>
@@ -59,9 +71,8 @@
             {% empty %}
                 <center class="w3-padding">
                     <i class="w3-jumbo material-icons">error_outline</i>
-                    <h1>No {% if verified %} verified {% endif %} leads for {{need}} support yet.</h1>
-                    <h4>Please keep checking here, as the community is regularly updating resources.</h4>
-                    <h5>Meanwhile, please <a class="positive-text" href="/volunteer">volunteer</a> if you are in the state to help others!</h5>
+                    <h1>No volunteers yet.</h1>
+                    <h4>Please join the community to become one.</h4>
                 </center>
             {% endfor %}
         </div>

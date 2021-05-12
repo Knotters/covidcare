@@ -6,11 +6,12 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Questrial&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="{% static 'styles/index.css' %}"  rel="stylesheet">
+        <link rel="stylesheet" href="{{superdom}}/static/styles/w3.css">
+        <link rel="stylesheet" href="{{superdom}}/static/fonts/Poppins.css">
+        <link rel="stylesheet" href="{{superdom}}/static/fonts/Questrial.css">
+        <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
+        <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
+        <link rel="stylesheet" href="{% static 'styles/index.css' %}">
         <title>{{appname}}</title>
     </head>
     <body>
@@ -18,7 +19,7 @@
             <span class="w3-left w3-padding-small"><h3>{{appname}}</h3></span>
             <span class="w3-right w3-row w3-padding">
                 <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
-                <button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button>
+                <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
             </span>
         </nav>
         <div class="w3-row w3-padding accent">
@@ -119,7 +120,12 @@
                 Instagram <a target="_blank" rel="noreferrer" href="https://instagram.com/knottersdotorg"><button class="w3-pink">knottersdotorg</button></a>
             </div>
             <div class="w3-col w3-half w3-padding-small">
-                <h2 class="primary-text w3-right">{{appname}} by <a href="{{superdom}}">Knotters Community</a>.</h3>
+                <div class="w3-row">
+                    <h2 class="primary-text w3-right">{{appname}} by <a href="{{superdom}}">Knotters Community</a>.</h2>
+                </div>
+                <div class="w3-row">
+                    <img class="w3-right" src="{{superdom}}/static/graphics/icon.svg" width="100" />
+                </div>
             </div>
         </footer>
     </body>

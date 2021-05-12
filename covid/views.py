@@ -1,7 +1,8 @@
-from django.shortcuts import HttpResponse
+from covid.decorators import superlogin
+from django.shortcuts import HttpResponse, redirect
 from .renderer import renderView
-from .decorators import require_superlogin
-
+from .env import SUPERDOMAIN
+from django.contrib.auth.models import User
 from needs.models import NeedType, Lead, Alert, Latest, Video, FAQ
 
 
@@ -27,7 +28,6 @@ def index(request):
         "faqs":faqs
     })
 
-
-@require_superlogin
-def private(request):
-    return HttpResponse("private")
+# @superlogin
+def volunteer(request):
+    return renderView(request, 'volunteer.html')

@@ -2,15 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Questrial&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="{% static 'styles/index.css' %}"  rel="stylesheet">
+        <link rel="stylesheet" href="{{superdom}}/static/styles/w3.css">
+        <link rel="stylesheet" href="{{superdom}}/static/fonts/Poppins.css">
+        <link rel="stylesheet" href="{{superdom}}/static/fonts/Questrial.css">
+        <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
+        <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
+        <link rel="stylesheet" href="{% static 'styles/index.css' %}">
         <title>Services · {{appname}}</title>
     </head>
     <body>
@@ -19,7 +19,7 @@
             <span class="w3-left"><h3>Services</h3></span>
             <span class="w3-right w3-row w3-padding">
                 <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
-                <a href="/private"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
+                <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
             </span>
         </nav>
         <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">

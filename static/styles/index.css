@@ -29,7 +29,7 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5, h6 {
   font-family: var(--head-font);
   color: var(--secondary);
   font-weight: bolder;
@@ -52,6 +52,9 @@ h5 {
   background-color: var(--accent) !important;
   color: var(--secondary);
 }
+.accent-text {
+  color: var(--accent) !important;
+}
 .negative {
   background-color: var(--negative) !important;
   color: var(--primary);
@@ -67,6 +70,9 @@ h5 {
 .sub-accent {
   background-color: var(--sub-accent) !important;
   color: var(--secondary);
+}
+.sub-accent-text {
+  color: var(--sub-accent) !important;
 }
 
 nav {
