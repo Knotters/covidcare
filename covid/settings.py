@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-if platform.system() == "Windows":
+if not env.PRODUCTION:
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static')
     ]
