@@ -45,7 +45,7 @@ class Lead(models.Model):
     address = models.CharField(max_length=2000, default='N/A')
     district = models.ForeignKey(District, on_delete=models.CASCADE)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
-    lastverified = models.DateTimeField(default=datetime.now())
+    lastupdate = models.DateTimeField(default=datetime.now())
     verified = models.BooleanField(default=False)
 
     def __str__(self):
