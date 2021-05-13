@@ -26,6 +26,8 @@ def superlogin(f):
                         request.session['name'] = str(user[0].first_name) + str(user[0].last_name)
                         break
                     return f(request, *args, **kwargs)
+            else:
+                return redirect(f'{SUPERDOMAIN}/accounts/login/?next={request.build_absolute_uri()}')
         except:
             return redirect(f'{SUPERDOMAIN}/accounts/login/?next={request.build_absolute_uri()}')
     wrap.__doc__=f.__doc__

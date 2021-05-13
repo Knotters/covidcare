@@ -28,6 +28,6 @@ def index(request):
         "phones":phones
     })
 
-# @superlogin
+@superlogin
 def volunteer(request):
     return renderView(request, 'volunteer.html')

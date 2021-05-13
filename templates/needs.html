@@ -1,41 +1,36 @@
 {% extends 'index.html' %}
 {% load static %}
-
-    {% block title %}<title>Services · {{appname}}</title>{% endblock %}
-    </head>
-    <body>
-        {% block nav %}
-        <nav class="w3-row sub-accent">
-            <a href="/" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
-            <span class="w3-left"><h3>Services</h3></span>
-            <span class="w3-right w3-row w3-padding">
-                <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
-                <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
-            </span>
-        </nav>
-        {% endblock %}
-        {% block content %}
-        <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">
-            <br/>
-            {% for need in needs %}
-                <div class="w3-col w3-quarter w3-padding">
-                    <a href="/needs/{{need.id}}">
-                        <div class="pallete primary">
-                            <img src="/media/{{need.image|safe}}" width="100"/>
-                            <h2>{{need.type | capfirst}}</h2>
-                            <span>{{need.about | capfirst}}</span>
-                        </div>
-                    </a>
+{% block title %}<title>Services · {{appname}}</title>{% endblock %}
+{% block nav %}
+<nav class="w3-row sub-accent">
+    <a href="/" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
+    <span class="w3-left"><h3>Services</h3></span>
+    <span class="w3-right w3-row w3-padding">
+        <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
+        <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
+    </span>
+</nav>
+{% endblock %}
+{% block content %}
+<div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">
+    <br/>
+    {% for need in needs %}
+        <div class="w3-col w3-quarter w3-padding">
+            <a href="/needs/{{need.id}}">
+                <div class="pallete primary">
+                    <img src="/media/{{need.image|safe}}" width="100"/>
+                    <h2>{{need.type | capfirst}}</h2>
+                    <span>{{need.about | capfirst}}</span>
                 </div>
-            {% empty %}
-                <center class="w3-padding">
-                    <i class="w3-jumbo material-icons">error_outline</i>
-                    <h1>No services yet.</h1>
-                    <h4>Please keep checking here, as the community is regularly updating resources.</h4>
-                    <h5>Meanwhile, please <a class="positive-text" href="/volunteer">volunteer</a> if you are in the state to help others!</h5>
-                </center>
-            {% endfor %}
+            </a>
         </div>
-        {% endblock %}
-    </body>
-</html>
+    {% empty %}
+        <center class="w3-padding">
+            <i class="w3-jumbo material-icons">error_outline</i>
+            <h1>No services yet.</h1>
+            <h4>Please keep checking here, as the community is regularly updating resources.</h4>
+            <h5>Meanwhile, please <a class="positive-text" href="/volunteer">volunteer</a> if you are in the state to help others!</h5>
+        </center>
+    {% endfor %}
+</div>
+{% endblock %}
