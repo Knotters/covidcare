@@ -1,19 +1,10 @@
+{% extends 'index.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{superdom}}/static/styles/w3.css">
-        <link rel="stylesheet" href="{{superdom}}/static/fonts/Poppins.css">
-        <link rel="stylesheet" href="{{superdom}}/static/fonts/Questrial.css">
-        <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
-        <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
-        <link rel="stylesheet" href="{% static 'styles/index.css' %}">
-        <title>Services · {{appname}}</title>
+
+    {% block title %}<title>Services · {{appname}}</title>{% endblock %}
     </head>
     <body>
+        {% block nav %}
         <nav class="w3-row sub-accent">
             <a href="/" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
             <span class="w3-left"><h3>Services</h3></span>
@@ -22,6 +13,8 @@
                 <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
             </span>
         </nav>
+        {% endblock %}
+        {% block content %}
         <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">
             <br/>
             {% for need in needs %}
@@ -43,5 +36,6 @@
                 </center>
             {% endfor %}
         </div>
+        {% endblock %}
     </body>
 </html>

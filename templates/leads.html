@@ -1,20 +1,9 @@
+{% extends 'index.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{superdom}}/static/styles/w3.css">
-        <link rel="stylesheet" href="{{superdom}}/static/fonts/Poppins.css">
-        <link rel="stylesheet" href="{{superdom}}/static/fonts/Questrial.css">
-        <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
-        <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
-        <link rel="stylesheet" href="{% static 'styles/index.css' %}">
-        <title>{{need | capfirst}} · {{appname}}</title>
-    </head>
+    {% block title %}<title>{{need | capfirst}} · {{appname}}</title>{% endblock %}
     <body style="background:url('/media/{{need.image}}'); background-repeat:no-repeat; background-size:cover; background-opacity:0.6">
-        <nav class="w3-row primary">
+        {% block nav %}
+        <nav class="w3-row">
             <a href="/needs" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
             <span class="w3-left"><h3>{{need | capfirst}} providers</h3></span>
             <span class="w3-right w3-row w3-padding">
@@ -22,6 +11,8 @@
                 <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
             </span>
         </nav>
+        {% endblock %}
+        {% block content %}
         <div class="w3-row sub-accent w3-padding">
             <a href="/needs/{{need.id}}">
             {% if not verified %}
@@ -65,5 +56,6 @@
                 </center>
             {% endfor %}
         </div>
+        {% endblock %}
     </body>
 </html>

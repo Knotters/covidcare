@@ -1,7 +1,7 @@
 from django.shortcuts import HttpResponse
 from .models import NeedType, Lead
 from covid.renderer import renderView
-import requests
+
 def index(request):
     needs = NeedType.objects.all()
     return renderView(request,'needs.html',{"needs":needs})

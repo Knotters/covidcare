@@ -2,19 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="preconnect" href="{{superdom}}">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#000000">
         <link rel="stylesheet" href="{{superdom}}/static/styles/w3.css">
         <link rel="stylesheet" href="{{superdom}}/static/fonts/Poppins.css">
         <link rel="stylesheet" href="{{superdom}}/static/fonts/Questrial.css">
         <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
         <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
         <link rel="stylesheet" href="{% static 'styles/index.css' %}">
-        <title>{{appname}}</title>
+        {% block title %}<title>{{appname}}</title>{% endblock %}
     </head>
     <body>
+        {% block nav %}
         <nav class="w3-row">
             <span class="w3-left w3-padding-small"><h3>{{appname}}</h3></span>
             <span class="w3-right w3-row w3-padding">
@@ -22,6 +24,8 @@
                 <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
             </span>
         </nav>
+        {% endblock %}
+        {% block content %}
         <div class="w3-row w3-padding accent">
           <marquee behaviour=alternate>
             {% for alert in alerts %}
@@ -55,9 +59,9 @@
         </div>
         <br/>
         <div class="w3-row w3-padding w3-center">
-            <button class="negative"><i class="material-icons">call</i><a href="tel:108">Dial 108 for emergency</a></button>
-            <button class="sub-accent"><i class="material-icons">call</i><a href="tel:104">Any other issues contact 24 hours to contol room</a></button>
-            <button class="positive"><i class="material-icons">call</i><a href="tel:104">Dial 104 for covid drugs & oxygen</a></button>
+            {% for phone in phones %}
+            <button class="negative"><i class="material-icons">call</i><a href="tel:{{phone.number}}">{{phone.text}}</a></button>
+            {% endfor %}
         </div>
         <br/>
         <div class="w3-row">
@@ -67,7 +71,7 @@
                     <marquee direction="up" scrollamount="3" style="height: 30vh;" behaviour=alternate>
                     {% for latest in latests %}
                     {% if latest.link %}
-                    <a href="{{latest.link}}">
+                    <a target="_blank" rel="noreferrer" href="{{latest.link}}">
                     {% endif %}
                     <h4 class="w3-row">
                         <li>{{latest.content}}</li>
@@ -112,7 +116,9 @@
             </details>
             {% endfor %}
         </div>
-        <footer class="w3-row secondary w3-padding" style="min-height: 40vh;">
+        {% endblock %}
+        {% block footer %}
+        <footer class="w3-row secondary w3-padding" style="min-height: 50vh;">
             <br/><br/>
             <div class="w3-col w3-half primary-text w3-padding">
                 <a href="mailto:{{contactmail}}"><button class="primary"><i class="material-icons">mail</i>{{contactmail}}</button></a><br/><br/>
@@ -128,5 +134,6 @@
                 </div>
             </div>
         </footer>
+        {% endblock %}
     </body>
 </html>

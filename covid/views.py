@@ -1,9 +1,7 @@
 from covid.decorators import superlogin
-from django.shortcuts import HttpResponse, redirect
 from .renderer import renderView
-from .env import SUPERDOMAIN
 from django.contrib.auth.models import User
-from needs.models import NeedType, Lead, Alert, Latest, Video, FAQ
+from needs.models import *
 
 
 def index(request):
@@ -12,6 +10,7 @@ def index(request):
     latests = Latest.objects.all()
     videos = Video.objects.all()
     faqs = FAQ.objects.all()
+    phones = Phoneline.objects.all()
     newneeds = []
     i = 1
     for need in needs:
@@ -25,7 +24,8 @@ def index(request):
         "alerts": alerts,
         "latests": latests, 
         "videos":videos,
-        "faqs":faqs
+        "faqs":faqs, 
+        "phones":phones
     })
 
 # @superlogin

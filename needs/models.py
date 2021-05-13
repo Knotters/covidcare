@@ -60,6 +60,13 @@ class Alert(models.Model):
     def __str__(self):
         return self.msg
 
+class Phoneline(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    text = models.CharField(max_length=1000)
+    number = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.text
 
 class Latest(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

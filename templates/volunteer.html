@@ -1,20 +1,8 @@
+{% extends 'index.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{superdom}}/static/styles/w3.css">
-        <link rel="stylesheet" href="{{superdom}}/static/fonts/Poppins.css">
-        <link rel="stylesheet" href="{{superdom}}/static/fonts/Questrial.css">
-        <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
-        <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
-        <link rel="stylesheet" href="{% static 'styles/index.css' %}">
-        <title>Volunteer · {{appname}}</title>
-    </head>
+    {% block title %}<title>Volunteer · {{appname}}</title>{% endblock %}
     <body>
+        {% block nav%}
         <nav class="w3-row primary">
             <a href="/needs" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
             <span class="w3-left"><h3>{{appname}} Volunteer</h3></span>
@@ -23,6 +11,8 @@
                 <a href="{{superdom}}/accounts/logout"><button class="positive"><i class="material-icons">person</i>{{request.user}}</button></a>
             </span>
         </nav>
+        {% endblock %}
+        {% block content %}
         <div class="w3-row w3-center w3-padding">
             <br/>
             <i class="material-icons w3-jumbo positive-text">add_circle</i>
@@ -76,5 +66,6 @@
                 </center>
             {% endfor %}
         </div>
+        {% endblock %}
     </body>
 </html>
