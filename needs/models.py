@@ -2,24 +2,49 @@ import uuid
 from django.db import models
 from datetime import datetime
 
-def needTypeImgPath(instance,filename):
+
+def needTypeImgPath(instance, filename):
     return 'needs/types/{}/'.format(str(instance.type))+'/{}'.format(filename)
+
+
+class State(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    sid = models.IntegerField(default=1)
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
+
+class District(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    did = models.IntegerField(default=1)
+    name = models.CharField(max_length=150)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.state.name} - {self.name}'
+
 
 class NeedType(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.CharField(max_length=50)
-    about = models.CharField(max_length=100, default='Browse sources including volunteer verified ones.')
-    image = models.FileField(upload_to=needTypeImgPath,null=True,blank=True,max_length=500)
+    about = models.CharField(
+        max_length=100, default='Browse sources including volunteer verified ones.')
+    image = models.FileField(upload_to=needTypeImgPath,null=True, blank=True, max_length=500)
 
     def __str__(self):
         return self.type
+
 
 class Lead(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     needtype = models.ForeignKey(NeedType, on_delete=models.CASCADE)
     provider = models.CharField(max_length=1000)
-    location = models.CharField(max_length=2000,default='N/A')
-    contact = models.CharField(max_length=1000,null=False,blank=False)
+    contact = models.CharField(max_length=1000, null=False, blank=False)
+    address = models.CharField(max_length=2000, default='N/A')
+    district = models.ForeignKey(District, on_delete=models.CASCADE)
+    state = models.ForeignKey(State, on_delete=models.CASCADE)
     lastverified = models.DateTimeField(default=datetime.now())
     verified = models.BooleanField(default=False)
 
@@ -35,6 +60,7 @@ class Alert(models.Model):
     def __str__(self):
         return self.msg
 
+
 class Latest(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     content = models.CharField(max_length=1000)
@@ -43,6 +69,7 @@ class Latest(models.Model):
 
     def __str__(self):
         return self.content
+
 
 class Video(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -54,6 +81,7 @@ class Video(models.Model):
             return self.link
         return self.title
 
+
 class FAQ(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     question = models.CharField(max_length=1000)
@@ -61,4 +89,3 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
-    

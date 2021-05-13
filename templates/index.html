@@ -34,7 +34,7 @@
             <br/>
             {% for need in needs %}
             <div class="w3-col w3-quarter w3-padding">
-                <a href="/needs/{{need}}">
+                <a href="/needs/{{need.id}}">
                     <div class="pallete primary">
                         <img src="/media/{{need.image|safe}}" width="100"/>
                         <h2>{{need.type | capfirst}}</h2>

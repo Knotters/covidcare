@@ -23,14 +23,14 @@
             </span>
         </nav>
         <div class="w3-row sub-accent w3-padding">
-            <a href="/needs/{{need}}">
+            <a href="/needs/{{need.id}}">
             {% if not verified %}
             <button class="positive">All</button>
             {% else %}
             <button class="primary">All</button>
             {% endif %}
             </a>
-            <a href="/needs/{{need}}?verified=1">
+            <a href="/needs/{{need.id}}?verified=1">
             {% if verified %}
             <button class="positive">Verified</button>
             {% else %}
