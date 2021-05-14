@@ -63,5 +63,5 @@ jobs:
       working-directory: C:/Users/Administrator/actions-runner/knotters/covidcare/covidcare
     - name: Install Dependencies
       run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
