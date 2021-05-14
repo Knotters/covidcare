@@ -97,7 +97,7 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question
 
-class Infi(models.Model):
+class Infi(mixins.SheetSyncableMixin,models.Model):
     speadsheet_id = "1IXpZEpGFzJfT7kJ5Kk_P6MPyBseS2xvFDkxcK064NqU"
     model_id_field = 'id'
     sheet_id_field = "id"
