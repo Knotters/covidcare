@@ -1,4 +1,5 @@
 from django.shortcuts import HttpResponse
+from django.core.management import call_command
 from .models import NeedType, Lead
 from covid.renderer import renderView
 
@@ -22,3 +23,13 @@ def needs(request,need=None):
         return renderView(request, 'leads.html', { 'leads': resources, 'need': needobj, 'verified':verified }) 
     except:
         return HttpResponse("No such need")
+
+def callCommand(request,argv):
+    commands = {"sync_sheets":"python manage.py syncgsheets"}
+    try:
+        output = "The result is: "
+        output += call_command(commands[argv])
+        return HttpResponse(" ".join(i for i in output))
+    except Exception as e:
+        print(e)
+        return HttpResponse("There is not such command")
