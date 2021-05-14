@@ -13,20 +13,38 @@
 {% endblock %}
 {% block content %}
 <div class="w3-row sub-accent w3-padding">
-    <a href="/needs/{{need.id}}">
-    {% if not verified %}
-    <button class="positive">All</button>
-    {% else %}
-    <button class="primary">All</button>
+    <form>
+    {% if state %}
+        <input type="hidden" value="{{state}}" name="state">
     {% endif %}
-    </a>
-    <a href="/needs/{{need.id}}?verified=1">
-    {% if verified %}
-    <button class="positive">Verified</button>
-    {% else %}
-    <button class="primary">Verified</button>
+    <input list="states" id="stateselected" placeholder="Choose state"
+    {% if state %}
+     value="{{state.name}}"
+     disabled
+     {% else %}
+     name="state"
+     {% endif %}
+      required />
+    <datalist id="states">
+    {% for state in states %}
+    <option value="{{state.name|capfirst}}">
+    {% endfor %}
+    </datalist>
+    {% if state %}
+    <input list="districts" name="district" id="districtselected" placeholder="Choose district"
+    {% if district %}
+    value="{{district.name}}"
     {% endif %}
-    </a>
+    required />
+    <datalist id="districts">
+    {% for district in districts %}
+    <option value="{{district.name|capfirst}}">
+    {% endfor %}
+    </datalist>
+    <a href="/needs/{{need.id}}" ><button class="negative" type="button"><i class="material-icons">clear</i>Clear filters</button></a>
+    {% endif %}
+    <button class="positive" type="submit" onclick="loadproviders()"><i class="material-icons">autorenew</i>Load providers</button>
+    </form>
 </div>
 <div class="w3-row w3-light-grey" style="padding-bottom: 22px;">
     <br/>
@@ -37,19 +55,14 @@
             <div class="w3-row">
                 <button class="sub-accent"><i class="material-icons">call</i><a href="tel:{{lead.contact}}">{{lead.contact}}</a></button><br/>
                 <button class="accent"><i class="material-icons">place</i><a target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/{{lead.location}}">{{lead.location}}</a></button><br/>
-                {% if lead.verified %}
-                <button class="positive"><i class="material-icons">verified</i>Verified</button><br/>
                 <button class="primary"><i class="material-icons">history</i>{{lead.lastverified}}</button><br/>
-                {% else %}
-                <button class="negative" onclick="alert('Not verified yet. You can still try contacting.')"><i class="material-icons">warning</i>Unverified</button><br/>
-                {% endif %}
             </div>
         </div>
     </div>
     {% empty %}
     <center class="w3-padding">
         <i class="w3-jumbo material-icons">error_outline</i>
-        <h1>No {% if verified %} verified {% endif %} leads for {{need}} support yet.</h1>
+        <h1>No leads for {{need}} support yet {% if district %} in {{district.name}}, {% endif %}{% if state %} in {{state.name}}{% endif %}.</h1>
         <h4>Please keep checking here, as the community is regularly updating resources.</h4>
         <h5>Meanwhile, please <a class="positive-text" href="/volunteer">volunteer</a> if you are in the state to help others!</h5>
     </center>

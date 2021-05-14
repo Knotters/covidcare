@@ -162,3 +162,14 @@ details[open] > summary::after {
 details > summary::-webkit-details-marker {
   display: none;
 }
+input{
+  border:0;
+  outline: 0;
+  padding: 8px 8px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+input:focus{
+  border:0px
+}

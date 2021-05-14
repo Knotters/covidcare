@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}<title>Media · {{appname}}</title>{% endblock %}
+{% block nav %}
+<nav class="w3-row sub-accent">
+    <a href="/" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
+    <span class="w3-left"><h3>Media Clips</h3></span>
+    <span class="w3-right w3-row w3-padding">
+        <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
+        <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
+    </span>
+</nav>
+
+{% endblock %}
+{% block content %}
+<div class="w3-row w3-light-grey" style="padding-bottom: 22px;">
+    <br/>
+    {% for video in videos %}
+    <div class="w3-col w3-third w3-padding">
+        <iframe style="height:300px; width: 100%; border-radius: 12px;" src="{{video.link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

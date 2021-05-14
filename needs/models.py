@@ -46,7 +46,6 @@ class Lead(models.Model):
     district = models.ForeignKey(District, on_delete=models.CASCADE)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
     lastupdate = models.DateTimeField(default=datetime.now())
-    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.provider} for {self.needtype}'

@@ -9,6 +9,12 @@ def index(request):
     needs = NeedType.objects.all()
     latests = Latest.objects.all()
     videos = Video.objects.all()
+    newvideos = []
+    i = 1
+    for video in videos:
+        if i < 4:
+            newvideos.append(video)
+        i += 1
     faqs = FAQ.objects.all()
     phones = Phoneline.objects.all()
     newneeds = []
@@ -22,11 +28,19 @@ def index(request):
         "needs": newneeds,
         "totalproviders": totalproviders,
         "alerts": alerts,
-        "latests": latests, 
-        "videos":videos,
-        "faqs":faqs, 
-        "phones":phones
+        "latests": latests,
+        "videos": newvideos,
+        "faqs": faqs,
+        "phones": phones
     })
+
+
+def mediaclips(request):
+    videos = Video.objects.all()
+    return renderView(request, 'media.html', {
+        "videos": videos,
+    })
+
 
 @superlogin
 def volunteer(request):
