@@ -1,7 +1,9 @@
 import uuid
+from uuid import uuid4
 from django.db import models
 from datetime import datetime
 from gsheets import mixins
+from gsheets.signals import sheet_row_processed
 
 def needTypeImgPath(instance, filename):
     return 'needs/types/{}/'.format(str(instance.type))+'/{}'.format(filename)
@@ -98,9 +100,24 @@ class FAQ(models.Model):
         return self.question
 
 class Infi(mixins.SheetSyncableMixin,models.Model):
-    speadsheet_id = "1IXpZEpGFzJfT7kJ5Kk_P6MPyBseS2xvFDkxcK064NqU"
+    spreadsheet_id = "1IXpZEpGFzJfT7kJ5Kk_P6MPyBseS2xvFDkxcK064NqU"
     model_id_field = 'id'
-    sheet_id_field = "id"
-    id = models.UUIDField(primary_key=True,editable=False)
+    sheet_id_field = "sno"
+    sno = models.IntegerField()
+    id = models.CharField(primary_key=True, max_length=255, default=uuid4)
     question = models.CharField(max_length=5000)
     link = models.CharField(max_length=1000)
+
+
+def CreateOne(instance=None, created=None, data=None, **kwargs):
+    try:
+        obj = Infi.objects.get(id=data["id"])
+        obj.question=data["question"]
+        obj.link=data["link"]
+        obj.save()
+    except:
+        Infi.objects.create(id=data["id"],question=data["question"],link=data["link"])
+        Infi.save()
+
+    
+sheet_row_processed.connect(CreateOne,sender=Infi)
