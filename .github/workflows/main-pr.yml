@@ -25,6 +25,25 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Setup Environment
+      run: |
+        touch covid/.env
+        echo "PROJECTKEY=${{ secrets.PROJECTKEY }}" >> covid/.env
+        echo "PUBNAME=${{ secrets.PUBNAME }}" >> covid/.env
+        echo "ENV=${{ secrets.ENV }}" >> covid/.env
+        echo "HOSTS=${{ secrets.HOSTS }}" >> covid/.env
+        echo "DBNAME=${{ secrets.DBNAME }}" >> covid/.env
+        echo "DBLINK=${{ secrets.DBLINK }}" >> covid/.env
+        echo "DBUSER=${{ secrets.DBUSER }}" >> covid/.env
+        echo "DBPASS=${{ secrets.DBPASS }}" >> covid/.env
+        echo "SUPDBNAME=${{ secrets.SUPDBNAME }}" >> covid/.env
+        echo "SUPDBLINK=${{ secrets.SUPDBLINK }}" >> covid/.env
+        echo "SUPDBUSER=${{ secrets.SUPDBUSER }}" >> covid/.env
+        echo "SUPDBPASS=${{ secrets.SUPDBPASS }}" >> covid/.env
+        echo "MAILUSER=${{ secrets.MAILUSER }}" >> covid/.env
+        echo "MAILPASS=${{ secrets.MAILPASS }}" >> covid/.env
+        echo "ADMINPATH=${{ secrets.ADMINPATH }}" >> covid/.env
+        echo "SUPERDOMAIN=${{ secrets.SUPERDOMAIN }}" >> covid/.env
     - name: Unit Testing
       run: |
         python manage.py test
