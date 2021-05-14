@@ -4,7 +4,7 @@
 
 ### Environment
 
-Copy contents of [covid/.env.example](covid/.env.example) to a new file at [covid/.env](covid/.env), and set the values in content accordingly.
+Copy the contents of [covid/.env.example](covid/.env.example) to a new file at [covid/.env](covid/.env), and set the values in content accordingly.
 
 ### Dependencies
 
