@@ -65,32 +65,34 @@
         </div>
         <br/>
         <div class="w3-row">
-            <div class="w3-col w3-third w3-padding">
-                <div class="pallete accent" style="height: 44vh;">
-                    <center><h3>Latest</h3></center>
-                    <marquee direction="up" scrollamount="3" style="height: 30vh;" behaviour=alternate>
-                    {% for latest in latests %}
-                    {% if latest.link %}
-                    <a target="_blank" rel="noreferrer" href="{{latest.link}}">
-                    {% endif %}
-                    <h4 class="w3-row">
-                        <li>{{latest.content}}</li>
-                    </h4>
-                    {% if latest.link %}
-                    </a>
-                    {% endif %}
-                    {% endfor %}
-                    </marquee>
+            <div class="w3-col w3-half w3-padding">
+                <div class="pallete accent">
+                    <div class="flourish-embed flourish-chart" data-src="story/230110"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
                 </div>
             </div>
-            <div class="w3-col w3-third w3-padding">
-                <div class="pallete">
-                    <img src="https://image.shutterstock.com/image-photo/mountains-under-mist-morning-amazing-260nw-1725825019.jpg" alt="Name2" style="width:100%;">
+            <div class="w3-col w3-half">
+                <div class="w3-row w3-padding">
+                    <div class="pallete primary" style="height: 44vh;">
+                        <center><h3>Latest</h3></center>
+                        <marquee direction="up" scrollamount="3" style="height: 30vh;" behaviour=alternate>
+                        {% for latest in latests %}
+                        {% if latest.link %}
+                        <a target="_blank" rel="noreferrer" href="{{latest.link}}">
+                        {% endif %}
+                        <h4 class="w3-row {% if latest.link %}positive-text{%endif%}">
+                            <li>{{latest.content}}</li>
+                        </h4>
+                        {% if latest.link %}
+                        </a>
+                        {% endif %}
+                        {% endfor %}
+                        </marquee>
+                    </div>
                 </div>
-            </div>
-            <div class="w3-col w3-third w3-padding">
-                <div class="pallete positive">
-                    <iframe src="https://www.google.com/maps/d/embed?mid=1yxvXy78wkNoYdtKHYDCPu0lcFfgqB0yq" style="width:100%;height:40vh;" ></iframe>
+                <div class="w3-row w3-padding">
+                    <div class="pallete positive">
+                        <iframe src="https://www.google.com/maps/d/embed?mid=1yxvXy78wkNoYdtKHYDCPu0lcFfgqB0yq" style="width:100%;height:40vh;border:0;border-radius:12px" ></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,6 +122,8 @@
                 </div>
             </details>
             {% endfor %}
+            <br/><br/>
+            <div class="w3-row"></div>
         </div>
         {% endblock %}
         {% block footer %}
