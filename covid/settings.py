@@ -18,13 +18,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'needs',
-    'gsheets'
+    'needs'
 ]
 
-GSHEETS = {
-    'CLIENT_SECRETS': os.path.join(BASE_DIR,'cred\\gsheets.json')
-}
+
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': os.path.join(BASE_DIR,"backup")}

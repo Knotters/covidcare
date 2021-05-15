@@ -8,7 +8,6 @@ urlpatterns = [
     path(env.ADMINPATH, admin.site.urls),
     path('', views.index),
     path('needs/', include('needs.urls')),
-    path('sheets/', include('gsheets.urls')),
     path('mediaclips/', views.mediaclips),
     path('volunteer', views.volunteer)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
