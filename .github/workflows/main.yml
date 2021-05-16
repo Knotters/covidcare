@@ -46,6 +46,8 @@ jobs:
         echo "MAILPASS=${{ secrets.MAILPASS }}" >> covid/.env
         echo "ADMINPATH=${{ secrets.ADMINPATH }}" >> covid/.env
         echo "SUPERDOMAIN=${{ secrets.SUPERDOMAIN }}" >> covid/.env
+        echo "googleCred=${{ secrets.googleCred }}" >> covid/.env
+        echo "worksheetId=${{ secrets.worksheetId }}" >> covid/.env
     - name: Unit Testing
       run: |
         python manage.py test
