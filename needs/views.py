@@ -29,9 +29,6 @@ def getDistrict(district):
     return districtobj
 
 
-gc = gspread.service_account(filename=env.GOOGLE_CRED)
-sh = gc.open_by_key(env.SPREADSHEETID)
-
 def index(request):
     needs = NeedType.objects.all()
     return renderView(request, 'needs.html', {"needs": needs})
@@ -77,6 +74,8 @@ def needs(request, need=None):
 
 @user_passes_test(lambda u: u.is_superuser)
 def addLeads(request):
+    gc = gspread.service_account(filename=env.GOOGLE_CRED)
+    sh = gc.open_by_key(env.SPREADSHEETID)
     newlyadded = 0
     updated = 0
     need_types = NeedType.objects.all()
