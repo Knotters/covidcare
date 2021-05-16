@@ -6,7 +6,7 @@ admin.site.register(NeedType)
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
     list_filter = ["needtype","state"]
-    list_display = ["provider", "needtype", "lastupdate"]
+    list_display = ["provider", "needtype","name", "state","district"]
     def get_queryset(self,request):
         query_set = super(LeadAdmin,self).get_queryset(request)
         return query_set

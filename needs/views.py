@@ -9,12 +9,13 @@ from gspread.models import Worksheet
 from covid import env
 from fuzzywuzzy import process
 
-# def getState(state):
-#     state_list = State.objects.values_list("name")
-#     state_list = [i[0] for i in state_list]
-#     Ratios = process.extract(state,state_list)
-#     finalvalue = max(Ratios,key=lambda x:x[1])
-#     print(finalvalue)
+def getState(state):
+    state_list = State.objects.values_list("name")
+    state_list = [i[0] for i in state_list]
+    Ratios = process.extract(state,state_list)
+    finalvalue = max(Ratios,key=lambda x:x[1])
+    stateobj = State.objects.get(name=finalvalue[0])
+    return stateobj
 
 
 def getDistrict(district):
@@ -22,11 +23,12 @@ def getDistrict(district):
     district_list = [i[0] for i in district_list]
     Ratios = process.extract(district,district_list)
     finalvalue = max(Ratios,key=lambda x:x[1])
+    if(finalvalue[1]<80):
+        return False
     districtobj = District.objects.get(name=finalvalue[0])
-    print(districtobj.name,districtobj.state)
     return districtobj
 
-getDistrict("Papumpare")
+
 gc = gspread.service_account(filename=env.GOOGLE_CRED)
 sh = gc.open_by_key(env.SPREADSHEETID)
 
@@ -74,42 +76,88 @@ def needs(request, need=None):
         raise Http404()
 
 @user_passes_test(lambda u: u.is_superuser)
-def addOxygens(request):
-    Worksheet = sh.worksheet("Oxygen")
-    res = Worksheet.get_all_records()
-    print(res[0])
-    oxy = NeedType.objects.get(type="Oxygen")
-    newlyaded = 0
+def addLeads(request):
+    newlyadded = 0
     updated = 0
-    count = 0
-    for i in res:
-        if(count==1):
-            break
-        sr_no = str(i["Sr. No."])
+    need_types = NeedType.objects.all()
+    for need in need_types:
         try:
-            obj = getDistrict(i["District"])
-            district,state = obj,obj.state
-        except:
-            district,state = None,None
-        if(sr_no.strip()!=""):
-            uuid = i["UUID"]
-            if(uuid.strip()==""):
-                oxygenobj = Lead.objects.create(needtype=oxy,provider=i["Provider"],contact=i["Contact"],state=state,district=district,address=i["Address"],name=i["Name"])
-                oxygenobj.save()
-                newlyaded+=1
-            else:
-                try:
-                    oxygenobj = Lead.objects.get(id=uuid)
-                    oxygenobj.needtype=oxy
-                    oxygenobj.provider=i["Provider"]
-                    oxygenobj.contact=i["Contact"]
-                    oxygenobj.state=state
-                    oxygenobj.district=district
-                    oxygenobj.address=i["Address"]
-                    oxygenobj.save()
-                    updated+=1
-                except:
-                    pass
-            count+=1
+            Worksheet = sh.worksheet(need.type)
 
-    return HttpResponse({"Added":newlyaded,"Updated":updated})
+        except:
+            print(f"{need.type} was not found")
+            continue
+        res = Worksheet.get_all_records()
+        for i in res:
+            sr_no = str(i["Sr. No."])
+            try:
+                districts= str(i["District"]).split(",")
+                for dis in districts:
+                    obj = getDistrict(dis)
+                    if(obj==False):
+                        continue
+                    district,state = obj,obj.state
+                    if(sr_no.strip()!=""):
+                        uuid = i["UUID"]
+                        if(uuid.strip()==""):
+                            oxygenobj = Lead.objects.create(needtype=need,provider=i["Provider"],contact=i["Contact"],state=state,district=district,address=i["Address"],name=i["Name"])
+                            Worksheet.update_cell(int(sr_no)+1,2,str(oxygenobj.id))
+                            oxygenobj.save()
+                            newlyadded+=1
+                        else:
+                            try:
+                                oxygenobj = Lead.objects.get(id=uuid)
+                                oxygenobj.needtype=need
+                                oxygenobj.provider=i["Provider"]
+                                oxygenobj.contact=i["Contact"]
+                                oxygenobj.state=state
+                                oxygenobj.district=district
+                                oxygenobj.address=i["Address"]
+                                oxygenobj.save()
+                                updated+=1
+                            except:
+                                pass
+            except:
+                state = i["State"]
+                if(state.strip()!=""):
+                    obj = getState(state)
+                    if(sr_no.strip()!=""):
+                        uuid = i["UUID"]
+                        if(uuid.strip()==""):
+                            oxygenobj = Lead.objects.create(needtype=need,provider=i["Provider"],contact=i["Contact"],state=obj,address=i["Address"],name=i["Name"])
+                            Worksheet.update_cell(int(sr_no)+1,2,str(oxygenobj.id))
+                            oxygenobj.save()
+                            newlyadded+=1
+                        else:
+                            try:
+                                oxygenobj = Lead.objects.get(id=uuid)
+                                oxygenobj.needtype=need
+                                oxygenobj.provider=i["Provider"]
+                                oxygenobj.contact=i["Contact"]
+                                oxygenobj.state=obj
+                                oxygenobj.address=i["Address"]
+                                oxygenobj.save()
+                                updated+=1
+                            except:
+                                pass
+                else:
+                    uuid = i["UUID"]
+                    if(uuid.strip()==""):
+                        oxygenobj = Lead.objects.create(needtype=need,provider=i["Provider"],contact=i["Contact"],address=i["Address"],name=i["Name"])
+                        Worksheet.update_cell(int(sr_no)+1,2,str(oxygenobj.id))
+                        oxygenobj.save()
+                        newlyadded+=1
+                    else:
+                        try:
+                            oxygenobj = Lead.objects.get(id=uuid)
+                            oxygenobj.needtype=need
+                            oxygenobj.provider=i["Provider"]
+                            oxygenobj.contact=i["Contact"]
+                            oxygenobj.address=i["Address"]
+                            oxygenobj.save()
+                            updated+=1
+                        except:
+                            pass
+            
+
+    return HttpResponse(f'"Added":{newlyadded},"Updated":{updated}')
