@@ -48,7 +48,6 @@ class Lead(models.Model):
     district = models.ForeignKey(District, on_delete=models.CASCADE,blank=True)
     state = models.ForeignKey(State, on_delete=models.CASCADE,blank=True)
     lastupdate = models.DateTimeField(default=datetime.now())
-    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.provider} for {self.needtype}'
@@ -95,6 +94,7 @@ class FAQ(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     question = models.CharField(max_length=1000)
     answer = models.CharField(max_length=5000)
+    source = models.CharField(max_length=5000)
 
     def __str__(self):
         return self.question
