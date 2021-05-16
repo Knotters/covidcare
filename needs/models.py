@@ -42,12 +42,12 @@ class Lead(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     needtype = models.ForeignKey(NeedType, on_delete=models.CASCADE)
     provider = models.CharField(max_length=1000)
+    name = models.CharField(max_length=80)
     contact = models.CharField(max_length=1000, null=False, blank=False)
     address = models.CharField(max_length=2000, default='N/A')
     district = models.ForeignKey(District, on_delete=models.CASCADE)
     state = models.ForeignKey(State, on_delete=models.CASCADE)
     lastupdate = models.DateTimeField(default=datetime.now())
-    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.provider} for {self.needtype}'
@@ -94,6 +94,7 @@ class FAQ(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     question = models.CharField(max_length=1000)
     answer = models.CharField(max_length=5000)
+    source = models.CharField(max_length=5000)
 
     def __str__(self):
         return self.question

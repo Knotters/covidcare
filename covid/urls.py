@@ -9,5 +9,5 @@ urlpatterns = [
     path('', views.index),
     path('needs/', include('needs.urls')),
     path('mediaclips/', views.mediaclips),
-    path('volunteer', views.volunteer)
+    # path('volunteer', views.volunteer)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

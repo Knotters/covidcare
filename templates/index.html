@@ -20,8 +20,7 @@
         <nav class="w3-row">
             <span class="w3-left w3-padding-small"><h3>{{appname}}</h3></span>
             <span class="w3-right w3-row w3-padding">
-                <a href="{{superdom}}"><button class="secondary"><i class="material-icons">home</i>Knotters</button></a>
-                <a href="/volunteer"><button class="accent"><i class="material-icons">volunteer_activism</i>Volunteer</button></a>
+                <a href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="30">Knotters</button></a>
             </span>
         </nav>
         {% endblock %}
@@ -119,6 +118,9 @@
                 <summary><h2 class="positive-text">{{faq.question}}</h2></summary>
                 <div class="w3-padding">
                    <h4>{{faq.answer}}</h4>
+                   {% if faq.source %}
+                   <h6><a class="positive-text" href="{{faq.source}}">Source: {{faq.source}}</a></h6>
+                   {% endif %}
                 </div>
             </details>
             {% endfor %}
