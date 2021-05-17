@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="{{superdom}}/static/fonts/Questrial.css">
         <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
         <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
-        <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+        <link rel="stylesheet" href="{{superdom}}/static/styles/index.css">
         {% block title %}<title>{{appname}}</title>{% endblock %}
     </head>
     <body>
@@ -20,7 +20,7 @@
         <nav class="w3-row">
             <span class="w3-left w3-padding-small"><h3>{{appname}}</h3></span>
             <span class="w3-right w3-row w3-padding">
-                <a href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="30">Knotters</button></a>
+                <a href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="25">Knotters</button></a>
             </span>
         </nav>
         {% endblock %}
@@ -133,13 +133,15 @@
             <br/><br/>
             <div class="w3-col w3-half primary-text w3-padding">
                 <a href="mailto:{{contactmail}}"><button class="primary"><i class="material-icons">mail</i>{{contactmail}}</button></a><br/><br/>
-                Github <a target="_blank" rel="noreferrer" href="https://github.com/Knotters"><button class="primary">Knotters</button></a><br/><br/>
-                Twitter <a target="_blank" rel="noreferrer" href="https://twitter.com/knottersdotorg"><button class="w3-blue">knottersdotorg</button></a><br/><br/>
-                Instagram <a target="_blank" rel="noreferrer" href="https://instagram.com/knottersdotorg"><button class="w3-pink">knottersdotorg</button></a>
+                <a target="_blank" rel="noreferrer" href="https://github.com/Knotters"><button class="primary"><img src="{{superdom}}/static/graphics/thirdparty/github-dark.png" width="25" />Knotters</button></a><br/><br/>
+                <a target="_blank" rel="noreferrer" href="https://twitter.com/knottersdotorg"><button class="primary"><img src="{{superdom}}/static/graphics/thirdparty/twitter.png" width="25" />knottersdotorg</button></a><br/><br/>
+                <a target="_blank" rel="noreferrer" href="https://instagram.com/knottersdotorg"><button class="primary"><img src="{{superdom}}/static/graphics/thirdparty/instagram.png" width="25" />knottersdotorg</button></a><br/><br/>
+                <a target="_blank" rel="noreferrer" href="https://facebook.com/knottersdotorg"><button class="primary"><img src="{{superdom}}/static/graphics/thirdparty/facebook.png" width="22" />knottersdotorg</button></a><br/><br/>
             </div>
             <div class="w3-col w3-half w3-padding-small">
+                <br/>
                 <div class="w3-row">
-                    <h2 class="primary-text w3-right">{{appname}} by <a href="{{superdom}}">Knotters Community</a>.</h2>
+                    <h2 class="primary-text w3-right">{{appname}} by <br/><a href="{{superdom}}">Knotters Community</a>.</h2>
                 </div>
                 <div class="w3-row">
                     <img class="w3-right" src="{{superdom}}/static/graphics/icon.svg" width="100" />

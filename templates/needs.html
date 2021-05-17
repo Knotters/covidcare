@@ -6,7 +6,7 @@
     <a href="/" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
     <span class="w3-left"><h3>Services</h3></span>
     <span class="w3-right w3-row w3-padding">
-        <a href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="30">Knotters</button></a>
+        <a href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="25">Knotters</button></a>
     </span>
 </nav>
 {% endblock %}
@@ -28,7 +28,7 @@
             <i class="w3-jumbo material-icons">error_outline</i>
             <h1>No services yet.</h1>
             <h4>Please keep checking here, as the community is regularly updating resources.</h4>
-            <h5>Meanwhile, please <a class="positive-text" href="/volunteer">volunteer</a> if you are in the state to help others!</h5>
+            {% comment %} <h5>Meanwhile, please <a class="positive-text" href="/volunteer">volunteer</a> if you are in the state to help others!</h5> {% endcomment %}
         </center>
     {% endfor %}
 </div>
