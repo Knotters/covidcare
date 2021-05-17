@@ -41,12 +41,12 @@ class NeedType(models.Model):
 class Lead(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     needtype = models.ForeignKey(NeedType, on_delete=models.CASCADE)
-    provider = models.CharField(max_length=1000)
-    name = models.CharField(max_length=80)
+    name = models.CharField(max_length=1000,blank=True)
+    provider = models.CharField(max_length=1000,blank=True)
     contact = models.CharField(max_length=1000, null=False, blank=False)
-    address = models.CharField(max_length=2000, default='N/A')
-    district = models.ForeignKey(District, on_delete=models.CASCADE)
-    state = models.ForeignKey(State, on_delete=models.CASCADE)
+    address = models.CharField(max_length=2000, default='N/A',blank=True)
+    district = models.ForeignKey(District, on_delete=models.CASCADE,blank=True)
+    state = models.ForeignKey(State, on_delete=models.CASCADE,blank=True)
     lastupdate = models.DateTimeField(default=datetime.now())
 
     def __str__(self):

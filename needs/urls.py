@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('call/<str:argv>',views.callCommand),
+    path('addLeads',views.addLeads),
     path('<str:need>', views.needs),
 ]
