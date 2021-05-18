@@ -13,7 +13,7 @@ jobs:
   testing:
     runs-on: ubuntu-20.04
     strategy:
-      max-parallel: 4
+      max-parallel: 1
       matrix:
         python-version: [3.9]
 
@@ -52,10 +52,11 @@ jobs:
       run: |
         python manage.py test
 
-  building:
+  build_deploy:
+    needs: [ testing ]
     runs-on: self-hosted
     strategy:
-      max-parallel: 4
+      max-parallel: 1
       matrix:
         python-version: [3.9]
 
