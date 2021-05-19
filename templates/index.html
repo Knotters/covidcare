@@ -2,17 +2,78 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="preconnect" href="{{superdom}}">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="theme-color" content="#000000">
-        <link rel="stylesheet" href="{{superdom}}/static/styles/w3.css">
-        <link rel="stylesheet" href="{{superdom}}/static/fonts/Poppins.css">
-        <link rel="stylesheet" href="{{superdom}}/static/fonts/Questrial.css">
-        <link rel="stylesheet" href="{{superdom}}/static/icons/material.css">
-        <link rel="icon" href="{{superdom}}/static/graphics/icon.svg">
-        <link rel="stylesheet" href="{{superdom}}/static/styles/index.css">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+        />
+        <link
+        rel="apple-touch-startup-image"
+        href="{% static 'graphics/icon.png' %}"
+        />
+        <meta
+        name="description"
+        content="{{description}}"
+        />
+        <link rel="manifest" href="{% static 'manifest.json' %%}" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="{{appname}}" />
+        <meta property="og:url" content="{{site}}" />
+        <meta property="og:locale" content="en-US" />
+        <meta
+        name="image"
+        property="og:image"
+        content="{{site}}/graphics/icon.png"
+        />
+        <meta property="og:type" content="tools" />
+        {% block og %}
+        <meta property="og:title" content="{{appname}}" />
+        <meta
+        property="og:description"
+        content="{{description}}"
+        />
+        <meta property="og:site_name" content="{{appname}}" />
+        {% endblock %}
+        <meta name="author" content="Knotters Community">
+        <meta
+        name="favicon"
+        content="{{site}}/graphics/icon.png"
+        />
+        <meta name="twitter:title" content="{{appname}}" />
+        <meta
+        name="twitter:description"
+        content="{{description}}"
+        />
+        <meta
+        name="twitter:image"
+        content="{{site}}/graphics/icon.png"
+        />
+        <meta name="twitter:site" content="@knottersdotorg" />
+        <meta name="twitter:creator" content="@ranjanistic" />
+        <meta name="twitter:url" content="{{site}}" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+        name="linkedin:card"
+        content="{{site}}/graphics/icon.png"
+        />
+        <link rel="apple-touch-icon" href="{% static 'graphics/icon.png' %}" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#ffffff" />
+        <meta name="apple-mobile-web-app-title" content="{{appname}}" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileImage" content="{% static 'graphics/icon.png' %}" />
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="stylesheet" href="{% static 'styles/w3.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/Poppins.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/Questrial.css' %}">
+        <link rel="stylesheet" href="{% static 'icons/material.css' %}">
+        <link rel="icon" href="{% static 'graphics/icon.svg' %}">
+        <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+
         {% block title %}<title>{{appname}}</title>{% endblock %}
     </head>
     <body>
@@ -20,7 +81,7 @@
         <nav class="w3-row">
             <span class="w3-left w3-padding-small"><h3>{{appname}}</h3></span>
             <span class="w3-right w3-row w3-padding">
-                <a href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="25">Knotters</button></a>
+                <a target="_blank" rel="noreferrer" href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="25">Knotters</button></a>
             </span>
         </nav>
         {% endblock %}
@@ -133,10 +194,10 @@
             <br/><br/>
             <div class="w3-col w3-half primary-text w3-padding">
                 <a href="mailto:{{contactmail}}"><button class="primary"><i class="material-icons">mail</i>{{contactmail}}</button></a><br/><br/>
-                <a target="_blank" rel="noreferrer" href="https://github.com/Knotters"><button class="primary"><img src="{{superdom}}/static/graphics/thirdparty/github-dark.png" width="25" />Knotters</button></a><br/><br/>
-                <a target="_blank" rel="noreferrer" href="https://twitter.com/knottersdotorg"><button class="primary"><img src="{{superdom}}/static/graphics/thirdparty/twitter.png" width="25" />knottersdotorg</button></a><br/><br/>
-                <a target="_blank" rel="noreferrer" href="https://instagram.com/knottersdotorg"><button class="primary"><img src="{{superdom}}/static/graphics/thirdparty/instagram.png" width="25" />knottersdotorg</button></a><br/><br/>
-                <a target="_blank" rel="noreferrer" href="https://facebook.com/knottersdotorg"><button class="primary"><img src="{{superdom}}/static/graphics/thirdparty/facebook.png" width="22" />knottersdotorg</button></a><br/><br/>
+                <a target="_blank" rel="noreferrer" href="https://github.com/Knotters"><button class="primary"><img src="{% static 'graphics/thirdparty/github-dark.png' %}" width="25" />Knotters</button></a><br/><br/>
+                <a target="_blank" rel="noreferrer" href="https://twitter.com/knottersdotorg"><button class="primary"><img src="{% static 'graphics/thirdparty/twitter.png' %}" width="25" />knottersdotorg</button></a><br/><br/>
+                <a target="_blank" rel="noreferrer" href="https://instagram.com/knottersdotorg"><button class="primary"><img src="{% static 'graphics/thirdparty/instagram.png' %}" width="25" />knottersdotorg</button></a><br/><br/>
+                <a target="_blank" rel="noreferrer" href="https://facebook.com/knottersdotorg"><button class="primary"><img src="{% static 'graphics/thirdparty/facebook.png' %}" width="22" />knottersdotorg</button></a><br/><br/>
             </div>
             <div class="w3-col w3-half w3-padding-small">
                 <br/>

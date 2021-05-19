@@ -1,0 +1,17 @@
+{
+    "short_name": "Covid Care",
+    "name": "Covid Care",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "icons": [
+      {
+        "src": "/static/graphics/icon.svg",
+        "type": "image/png",
+        "sizes":"462x452",
+        "purpose": "any"
+      }
+    ]
+  }
+  

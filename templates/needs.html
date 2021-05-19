@@ -1,5 +1,13 @@
 {% extends 'index.html' %}
 {% load static %}
+{% block og %}
+<meta property="og:title" content="Services · {{appname}}" />
+<meta
+property="og:description"
+content="These are the services of which we currently provide leads to those in need."
+/>
+<meta property="og:site_name" content="Services · {{appname}}" />
+{% endblock %}
 {% block title %}<title>Services · {{appname}}</title>{% endblock %}
 {% block nav %}
 <nav class="w3-row sub-accent">
