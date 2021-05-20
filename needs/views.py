@@ -20,7 +20,6 @@ def getDistrict(district):
     district_list = District.objects.values_list("name")
     district_list = [i[0] for i in district_list]
     Ratios = process.extract(district, district_list)
-    print(Ratios)
     finalvalue = max(Ratios, key=lambda x: x[1])
     if(finalvalue[1] < 80):
         return False
@@ -114,7 +113,8 @@ def addwithDistrict(sr_no,district,state,need,lead):
                 oxygenobj.save()
                 return oxygenobj,False
             except:
-                pass
+                return False,False
+                
 
 
 def addwithoutDistrict(sr_no,state,need,lead):
@@ -139,7 +139,7 @@ def addwithoutDistrict(sr_no,state,need,lead):
                     oxygenobj.save()
                     return oxygenobj,False
                 except:
-                    pass
+                    return False,False
 
 
 def delRajat():
@@ -156,6 +156,7 @@ def addLeads(request):
             return Http404()
     except:
         return Http404()
+    print("Processing data retrieval")
     newlyadded = 0
     updated = 0
     try:
@@ -180,39 +181,44 @@ def addLeads(request):
                         obj = getDistrict(dis)
                         if(obj == False):
                             newobj,is_added = addwithoutDistrict(sr_no,i["State"],need,i)
-                            Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
-                            if(is_added):
-                                output_list.append(f'Record created: {newobj.provider} : {need.type}')
-                                newlyadded += 1
-                            else:
-                                output_list.append(f"Record updated: {newobj.provider} : {need.type}")
-                                updated+=1
+                            if newobj:
+                                Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
+                                if(is_added):
+                                    output_list.append(f'Record created: {newobj.provider} : {need.type}')
+                                    newlyadded += 1
+                                else:
+                                    output_list.append(f"Record updated: {newobj.provider} : {need.type}")
+                                    updated+=1
                         else:
                             district, state = obj, obj.state
+
                             newobj,is_added = addwithDistrict(sr_no,district,state,need,i)
-                            Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
-                            if(is_added):
-                                output_list.append(f'Record created: {newobj.provider} : {need.type}')
-                                newlyadded += 1
-                            else:
-                                output_list.append(f"Record updated: {newobj.provider} : {need.type}")
-                                updated+=1
+                            if newobj:
+                                Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
+                                if(is_added):
+                                    output_list.append(f'Record created: {newobj.provider} : {need.type}')
+                                    newlyadded += 1
+                                else:
+                                    output_list.append(f"Record updated: {newobj.provider} : {need.type}")
+                                    updated+=1
                 except Exception as e:
                     print(e)
                     states = str(i["State"]).split(",")
                     for sts in states:
                         newobj,is_added = addwithoutDistrict(sr_no,sts,need,i)
-                        Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
-                        if(is_added):
-                            output_list.append(f'Record created: {newobj.provider} : {need.type}')
-                            newlyadded += 1
-                        else:
-                            output_list.append(f"Record updated: {newobj.provider} : {need.type}")
-                            updated+=1
+                        if newobj:
+                            Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
+                            if(is_added):
+                                output_list.append(f'Record created: {newobj.provider} : {need.type}')
+                                newlyadded += 1
+                            else:
+                                output_list.append(f"Record updated: {newobj.provider} : {need.type}")
+                                updated+=1
 
                         
     except Exception as e:
         print(e)
         output_list.append("Some error occured")
-
-    return HttpResponse(",".join(i for i in output_list))
+    response = ",".join(i for i in output_list)
+    print(*(response.split(",")),sep="\n")
+    return HttpResponse(response)
