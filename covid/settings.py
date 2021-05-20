@@ -37,22 +37,34 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'covid.urls'
-
-TEMPLATES = [
-    {
+if env.ISPRODUCTION:
+    TEMPLATES = [{
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+            'loaders': [
+                (
+                    'django.template.loaders.filesystem.Loader',
+                    [BASE_DIR / 'templates'],
+                ),
             ],
         },
-    },
-]
+    }]
+else:
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [os.path.join(BASE_DIR, 'templates')],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        },
+    ]
 
 WSGI_APPLICATION = 'covid.wsgi.application'
 

@@ -16,3 +16,4 @@ migrations
 media/
 cred/
 static/admin/
+scheduler.py
