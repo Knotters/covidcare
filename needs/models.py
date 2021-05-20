@@ -45,7 +45,7 @@ class Lead(models.Model):
     provider = models.CharField(max_length=1000,blank=True)
     contact = models.CharField(max_length=1000, null=False, blank=False)
     address = models.CharField(max_length=2000, default='N/A',blank=True)
-    district = models.ForeignKey(District, on_delete=models.CASCADE,blank=True)
+    district = models.ForeignKey(District, on_delete=models.CASCADE,blank=True,null=True,default="")
     state = models.ForeignKey(State, on_delete=models.CASCADE,blank=True)
     lastupdate = models.DateTimeField(default=datetime.now())
 
