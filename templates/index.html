@@ -88,10 +88,10 @@
         {% block content %}
         <div class="w3-row w3-padding accent">
           <marquee behaviour=alternate>
+              <button class="secondary">{{ totalproviders }} providers so far!</button>
             {% for alert in alerts %}
               <a target="_blank" rel="noreferrer" href="{{alert.link}}"><button class="primary">{{alert}}</button></a>
             {% endfor %}
-              <button class="primary">{{ totalproviders }} providers so far!</button>
           </marquee>
         </div>
         <div class="w3-row w3-center w3-light-grey" style="padding-bottom: 22px;">

@@ -20,6 +20,7 @@ def getDistrict(district):
     district_list = District.objects.values_list("name")
     district_list = [i[0] for i in district_list]
     Ratios = process.extract(district, district_list)
+    print(Ratios)
     finalvalue = max(Ratios, key=lambda x: x[1])
     if(finalvalue[1] < 80):
         return False
@@ -43,33 +44,37 @@ def needs(request, need=None):
         itemTo = 10
     try:
         needobj = NeedType.objects.get(id=need)
+        if needobj.mapsrc:
+            return renderView(request, 'leads.html', {
+                'need': needobj
+            })
         states = []
         districts = []
         resources = []
         try:
             statename = str(request.GET['state'])
             state = State.objects.get(name=statename)
-            districts = District.objects.filter(state=state)
         except:
             states = State.objects.all()
             state = None
 
         district = None
         if state:
+            districts = District.objects.filter(state=state)
             try:
                 distname = str(request.GET['district'])
-                district = District.objects.get(name=distname, state=state)
+                district = districts.get(name=distname)
             except:
                 district = None
 
         if district:
-            resources = Lead.objects.filter(needtype=needobj,state=state,district=district)[itemFrom:itemTo]
+            resources = Lead.objects.filter(needtype=needobj,state=state,district=district).order_by('-lastupdate')[itemFrom:itemTo]
             totalleads = Lead.objects.filter(needtype=needobj,state=state,district=district).count()
         elif state:
-            resources = Lead.objects.filter(needtype=needobj,state=state)[itemFrom:itemTo]
+            resources = Lead.objects.filter(needtype=needobj,state=state).order_by('-lastupdate')[itemFrom:itemTo]
             totalleads = Lead.objects.filter(needtype=needobj,state=state).count()
         else:
-            resources = Lead.objects.filter(needtype=needobj)[itemFrom:itemTo]
+            resources = Lead.objects.filter(needtype=needobj).order_by('-lastupdate')[itemFrom:itemTo]
             totalleads = Lead.objects.filter(needtype=needobj).count()
         
         if itemTo > totalleads:
@@ -88,6 +93,59 @@ def needs(request, need=None):
         return renderView(request, 'leads.html', data)
     except:
         raise Http404()
+
+def addwithDistrict(sr_no,district,state,need,lead):
+    if(sr_no.strip() != ""):
+        uuid = lead["UUID"]
+        if(uuid.strip() == ""):
+            oxygenobj = Lead.objects.create(
+                needtype=need, provider=lead["Provider"], contact=lead["Contact"], state=state, district=district, address=lead["Address"], name=lead["Name"])
+            oxygenobj.save()
+            return oxygenobj,True
+        else:
+            try:
+                oxygenobj = Lead.objects.get(id=uuid)
+                oxygenobj.needtype = need
+                oxygenobj.provider = lead["Provider"]
+                oxygenobj.contact = lead["Contact"]
+                oxygenobj.state = state
+                oxygenobj.district = district
+                oxygenobj.address = lead["Address"]
+                oxygenobj.save()
+                return oxygenobj,False
+            except:
+                pass
+
+
+def addwithoutDistrict(sr_no,state,need,lead):
+    obj = getState(state)
+    if(obj!=False):
+        state = obj
+        if(sr_no.strip() != ""):
+            uuid = lead["UUID"]
+            if(uuid.strip() == ""):
+                oxygenobj = Lead.objects.create(
+                    needtype=need, provider=lead["Provider"], contact=lead["Contact"], state=state, address=lead["Address"], name=lead["Name"])
+                oxygenobj.save()
+                return oxygenobj,True
+            else:
+                try:
+                    oxygenobj = Lead.objects.get(id=uuid)
+                    oxygenobj.needtype = need
+                    oxygenobj.provider = lead["Provider"]
+                    oxygenobj.contact = lead["Contact"]
+                    oxygenobj.state = state
+                    oxygenobj.address = lead["Address"]
+                    oxygenobj.save()
+                    return oxygenobj,False
+                except:
+                    pass
+
+
+def delRajat():
+    objs = Lead.objects.filter(provider="Rajat Air Products")
+    for i in objs:
+        i.delete()
 
 
 def addLeads(request):
@@ -115,89 +173,46 @@ def addLeads(request):
             for i in res:
                 sr_no = str(i["Sr. No."])
                 try:
+                    if(i["District"].strip()==""):
+                        raise Exception
                     districts = str(i["District"]).split(",")
                     for dis in districts:
                         obj = getDistrict(dis)
                         if(obj == False):
-                            continue
-                        district, state = obj, obj.state
-                        if(sr_no.strip() != ""):
-                            uuid = i["UUID"]
-                            if(uuid.strip() == ""):
-                                oxygenobj = Lead.objects.create(
-                                    needtype=need, provider=i["Provider"], contact=i["Contact"], state=state, district=district, address=i["Address"], name=i["Name"])
-                                Worksheet.update_cell(
-                                    int(sr_no)+1, 2, str(oxygenobj.id))
-                                oxygenobj.save()
-                                output_list.append(f'Record created: {i["Provider"]} : {need.type}')
+                            newobj,is_added = addwithoutDistrict(sr_no,i["State"],need,i)
+                            Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
+                            if(is_added):
+                                output_list.append(f'Record created: {newobj.provider} : {need.type}')
                                 newlyadded += 1
                             else:
-                                try:
-                                    oxygenobj = Lead.objects.get(id=uuid)
-                                    oxygenobj.needtype = need
-                                    oxygenobj.provider = i["Provider"]
-                                    oxygenobj.contact = i["Contact"]
-                                    oxygenobj.state = state
-                                    oxygenobj.district = district
-                                    oxygenobj.address = i["Address"]
-                                    oxygenobj.save()
-                                    updated += 1
-                                    output_list.append(f"Record updated: {i['Provider']} : {need.type}")
-                                except:
-                                    pass
-                except:
-                    states = str(i["State"]).split(",")
-                    for state in states:
-                        if(state.strip() != ""):
-                            obj = getState(state)
-                            if(sr_no.strip() != ""):
-                                uuid = i["UUID"]
-                                if(uuid.strip() == ""):
-                                    oxygenobj = Lead.objects.create(
-                                        needtype=need, provider=i["Provider"], contact=i["Contact"], state=obj, address=i["Address"], name=i["Name"])
-                                    Worksheet.update_cell(
-                                        int(sr_no)+1, 2, str(oxygenobj.id))
-                                    oxygenobj.save()
-                                    output_list.append(f'Record created: {i["Provider"]} : {need.type}')
-                                    newlyadded += 1
-                                else:
-                                    try:
-                                        oxygenobj = Lead.objects.get(id=uuid)
-                                        oxygenobj.needtype = need
-                                        oxygenobj.provider = i["Provider"]
-                                        oxygenobj.contact = i["Contact"]
-                                        oxygenobj.state = obj
-                                        oxygenobj.address = i["Address"]
-                                        oxygenobj.save()
-                                        updated += 1
-                                        output_list.append(f"Record updated: {i['Provider']} : {need.type}")
-                                    except:
-                                        pass
+                                output_list.append(f"Record updated: {newobj.provider} : {need.type}")
+                                updated+=1
                         else:
-                            uuid = i["UUID"]
-                            if(uuid.strip() == ""):
-                                oxygenobj = Lead.objects.create(
-                                    needtype=need, provider=i["Provider"], contact=i["Contact"], address=i["Address"], name=i["Name"])
-                                Worksheet.update_cell(
-                                    int(sr_no)+1, 2, str(oxygenobj.id))
-                                oxygenobj.save()
-                                output_list.append(f'Record created: {i["Provider"]} : {need.type}')
+                            district, state = obj, obj.state
+                            newobj,is_added = addwithDistrict(sr_no,district,state,need,i)
+                            Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
+                            if(is_added):
+                                output_list.append(f'Record created: {newobj.provider} : {need.type}')
                                 newlyadded += 1
                             else:
-                                try:
-                                    oxygenobj = Lead.objects.get(id=uuid)
-                                    oxygenobj.needtype = need
-                                    oxygenobj.provider = i["Provider"]
-                                    oxygenobj.contact = i["Contact"]
-                                    oxygenobj.address = i["Address"]
-                                    oxygenobj.save()
-                                    updated += 1
-                                    output_list.append(f"Record updated: {i['Provider']} : {need.type}")
-                                except:
-                                    pass
+                                output_list.append(f"Record updated: {newobj.provider} : {need.type}")
+                                updated+=1
+                except Exception as e:
+                    print(e)
+                    states = str(i["State"]).split(",")
+                    for sts in states:
+                        newobj,is_added = addwithoutDistrict(sr_no,sts,need,i)
+                        Worksheet.update_cell(int(sr_no)+1, 2, str(newobj.id))
+                        if(is_added):
+                            output_list.append(f'Record created: {newobj.provider} : {need.type}')
+                            newlyadded += 1
+                        else:
+                            output_list.append(f"Record updated: {newobj.provider} : {need.type}")
+                            updated+=1
+
+                        
     except Exception as e:
         print(e)
-        output_list.append(e)
-    print("Job done")
-    output_list.append(f'"Added":{newlyadded},"Updated":{updated}')
+        output_list.append("Some error occured")
+
     return HttpResponse(",".join(i for i in output_list))

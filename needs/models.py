@@ -33,7 +33,7 @@ class NeedType(models.Model):
     about = models.CharField(
         max_length=100, default='Browse sources including volunteer verified ones.')
     image = models.FileField(upload_to=needTypeImgPath,null=True, blank=True, max_length=500)
-
+    mapsrc = models.CharField(max_length=2000,blank=True, null=True,default="")
     def __str__(self):
         return self.type
 
@@ -45,10 +45,9 @@ class Lead(models.Model):
     provider = models.CharField(max_length=1000,blank=True)
     contact = models.CharField(max_length=1000, null=False, blank=False)
     address = models.CharField(max_length=2000, default='N/A',blank=True)
-    district = models.ForeignKey(District, on_delete=models.CASCADE,blank=True)
+    district = models.ForeignKey(District, on_delete=models.CASCADE,blank=True,null=True,default="")
     state = models.ForeignKey(State, on_delete=models.CASCADE,blank=True)
     lastupdate = models.DateTimeField(default=datetime.now())
-
     def __str__(self):
         return f'{self.provider} for {self.needtype}'
 
