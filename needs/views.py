@@ -44,33 +44,37 @@ def needs(request, need=None):
         itemTo = 10
     try:
         needobj = NeedType.objects.get(id=need)
+        if needobj.mapsrc:
+            return renderView(request, 'leads.html', {
+                'need': needobj
+            })
         states = []
         districts = []
         resources = []
         try:
             statename = str(request.GET['state'])
             state = State.objects.get(name=statename)
-            districts = District.objects.filter(state=state)
         except:
             states = State.objects.all()
             state = None
 
         district = None
         if state:
+            districts = District.objects.filter(state=state)
             try:
                 distname = str(request.GET['district'])
-                district = District.objects.get(name=distname, state=state)
+                district = districts.get(name=distname)
             except:
                 district = None
 
         if district:
-            resources = Lead.objects.filter(needtype=needobj,state=state,district=district)[itemFrom:itemTo]
+            resources = Lead.objects.filter(needtype=needobj,state=state,district=district).order_by('-lastupdate')[itemFrom:itemTo]
             totalleads = Lead.objects.filter(needtype=needobj,state=state,district=district).count()
         elif state:
-            resources = Lead.objects.filter(needtype=needobj,state=state)[itemFrom:itemTo]
+            resources = Lead.objects.filter(needtype=needobj,state=state).order_by('-lastupdate')[itemFrom:itemTo]
             totalleads = Lead.objects.filter(needtype=needobj,state=state).count()
         else:
-            resources = Lead.objects.filter(needtype=needobj)[itemFrom:itemTo]
+            resources = Lead.objects.filter(needtype=needobj).order_by('-lastupdate')[itemFrom:itemTo]
             totalleads = Lead.objects.filter(needtype=needobj).count()
         
         if itemTo > totalleads:
@@ -166,11 +170,7 @@ def addLeads(request):
                 output_list.append(f"Worksheet not found: {need.type}")
                 continue
             res = Worksheet.get_all_records()
-            count = 0
             for i in res:
-                if(count==7):
-                    break
-                count+=1
                 sr_no = str(i["Sr. No."])
                 try:
                     if(i["District"].strip()==""):

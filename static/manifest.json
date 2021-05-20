@@ -9,7 +9,7 @@
       {
         "src": "/static/graphics/icon.svg",
         "type": "image/png",
-        "sizes":"462x452",
+        "sizes":"1000x1000",
         "purpose": "any"
       }
     ]
