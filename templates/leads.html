@@ -12,7 +12,7 @@
         height: 3px;
     }
     .cards .pallete::-webkit-scrollbar-thumb{
-        background-color: #333;
+        background-color:transparent;
     }
 
     @media screen and (max-width:900px){
@@ -103,7 +103,7 @@ content="{{need.about}}"
     <br/>
     {% for lead in leads %}
     <div class="w3-col w3-quarter w3-padding cards">
-        <div class="pallete primary">
+        <div class="pallete primary" style="display: flex; flex-direction: column;justify-content: space-evenly;">
             <h3>{{lead.provider}}</h3>
             {% if lead.name %}
             <h6>{{lead.name}}</h6>
