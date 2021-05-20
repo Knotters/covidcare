@@ -13,10 +13,10 @@ content="{{need.about}}"
 <nav class="w3-row">
     <a href="/needs" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
     <span class="w3-left"><h3>{{need | capfirst}} providers</h3></span>
-    {% if need.mapsrc %}
-    <a class="positive-text" href="{{need.mapsrc}}" target="_blank" rel="noreferrer">Map Source <i class="material-icons">open_in_new</i></a>
-    {% endif %}
     <span class="w3-right w3-row w3-padding">
+        {% if need.mapsrc %}
+        <a href="{{need.mapsrc}}" target="_blank" rel="noreferrer"><button class="positive"><i class="material-icons">open_in_new</i>Map Source</button></a>
+        {% endif %}
         <a href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="25">Knotters</button></a>
     </span>
 </nav>
