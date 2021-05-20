@@ -69,3 +69,6 @@ jobs:
       run: |
         py -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Collect static files
+      run: |
+        py manage.py collectstatic
