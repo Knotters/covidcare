@@ -5,11 +5,21 @@ from .models import *
 admin.site.register(NeedType)
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
-    list_filter = ["needtype","state"]
-    list_display = ["provider", "needtype","name", "state","district"]
+    list_filter = ["needtype","provider"]
+    list_display = ["provider", "needtype","name", "state","getDistrict"]
+
+    def getDistrict(self,obj):
+        if(obj.district is None):
+            return "District not provided"
+        else:
+            return obj.district
+        pass
+    getDistrict.short_description = 'District'
+
     def get_queryset(self,request):
-        query_set = super(LeadAdmin,self).get_queryset(request)
+        query_set = super(LeadAdmin,self).get_queryset(request).order_by("-lastupdate")
         return query_set
+
     class Meta:
         ordering = ("")
 

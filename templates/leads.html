@@ -1,18 +1,32 @@
 {% extends 'index.html' %}
 {% load static %}
+{% block og %}
+<meta property="og:title" content="{{need.type|capfirst}} Providers" />
+<meta
+property="og:description"
+content="{{need.about}}"
+/>
+<meta property="og:site_name" content="{{need.type| capfirst}} · {{appname}}" />
+{% endblock %}
 {% block title %}<title>{{need | capfirst}} · {{appname}}</title>{% endblock %}
 {% block nav %}
 <nav class="w3-row">
     <a href="/needs" class="w3-left w3-padding"><button class="primary"><i class="material-icons">arrow_back</i></button></a>
     <span class="w3-left"><h3>{{need | capfirst}} providers</h3></span>
     <span class="w3-right w3-row w3-padding">
+        {% if need.mapsrc %}
+        <a href="{{need.mapsrc}}" target="_blank" rel="noreferrer"><button class="positive"><i class="material-icons">open_in_new</i>Map Source</button></a>
+        {% endif %}
         <a href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/icon.svg" width="25">Knotters</button></a>
     </span>
 </nav>
 {% endblock %}
 {% block content %}
+{% if need.mapsrc %}
+<iframe src="{{need.mapsrc}}" width="100%" height="700"></iframe>
+{% else %}
 <div class="w3-row sub-accent w3-padding">
-    <form>
+    <form method="GET">
     {% if state %}
         <input type="hidden" value="{{state}}" name="state">
     {% endif %}
@@ -48,15 +62,20 @@
 <div class="w3-row w3-light-grey" style="padding-bottom: 22px;">
     <br/>
     {% for lead in leads %}
-    <div class="w3-col w3-quarter w3-padding">
-        <div class="pallete primary">
+    <div class="w3-col w3-quarter w3-padding cards">
+        <div class="pallete primary" style="display: flex; flex-direction: column;justify-content: space-evenly;">
             <h3>{{lead.provider}}</h3>
             {% if lead.name %}
             <h6>{{lead.name}}</h6>
             {% endif %}
             <div class="w3-row">
                 {% if lead.contact %}
-                <a href="tel:{{lead.contact}}"><button title="Contact" class="sub-accent"><i class="material-icons">call</i>{{lead.contact}}</button></a><br/>
+                {% if 'www' in lead.contact or 'http' in lead.contact %}
+                <a href="{{lead.contact}}">
+                {% else %}
+                <a href="tel:{{lead.contact}}">
+                {% endif %}
+                <button title="Contact" class="sub-accent"><i class="material-icons">call</i>{{lead.contact}}</button></a><br/>
                 {% endif %}
                 {% if lead.address %}
                 <a target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/{{lead.address}}+{{lead.state.name}}"><button title="Location" class="accent"><i class="material-icons">place</i>{{lead.address}}</button></a><br/>
@@ -66,7 +85,7 @@
                 {% endif %}
                 <br/>
                 {% if lead.state %}
-                <div class="w3-right">{{lead.district.name}}, {{lead.state.name}}</div>
+                <div class="w3-right">{% if lead.district %}{{lead.district.name}}, {% endif %}{{lead.state.name}}</div>
                 {% endif %}
             </div>
         </div>
@@ -81,4 +100,34 @@
     </center>
     {% endfor %}
 </div>
+{% if totalleads %}
+<div class="w3-row w3-center w3-padding">
+    <div class="w3-row">
+        <button class="secondary">Showing {{from}}-{{till}} out of {{totalleads}} sources</button>
+    </div>
+    <div class="w3-row">
+        <div class="w3-col w3-half w3-padding-small">
+        {% if from > 1 %}
+        <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="from" value="{{from|add:"-10"}}" type="number" />
+        <input type="hidden" name="till" value="{{till|add:"-10"}}" type="number" />
+        <button type="submit" class="accent"><i class="material-icons">skip_previous</i>Previous</button>
+        </form>
+        {% endif %}
+        </div>
+        <div class="w3-col w3-half w3-padding-small">
+        {% if till != totalleads %}
+        <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="from" value="{{from|add:"10"}}" type="number" />
+        <input type="hidden" name="till" value="{{till|add:"10"}}" type="number" />
+        <button type="submit" class="accent">Next<i class="material-icons">skip_next</i></button>
+        </form>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
 {% endblock %}

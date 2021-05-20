@@ -21,4 +21,6 @@ ADMINPATH = env('ADMINPATH')
 SUPERDOMAIN = env('SUPERDOMAIN')
 GOOGLE_CRED = env('googleCred')
 SPREADSHEETID = env('worksheetId')
+SITE = env('SITE')
+
 ISPRODUCTION = ENV == 'production'

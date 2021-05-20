@@ -48,6 +48,7 @@ jobs:
         echo "SUPERDOMAIN=${{ secrets.SUPERDOMAIN }}" >> covid/.env
         echo "googleCred=${{ secrets.googleCred }}" >> covid/.env
         echo "worksheetId=${{ secrets.worksheetId }}" >> covid/.env
+        echo "SITE=${{ secrets.SITE }}" >> covid/.env
     - name: Unit Testing
       run: |
         python manage.py test
@@ -68,3 +69,6 @@ jobs:
       run: |
         py -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Collect static files
+      run: |
+        py manage.py collectstatic --noinput
