@@ -1,52 +1,6 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block og %}
-<style>
-    .cards .pallete{
-        height:300px;
-        overflow-y: scroll;
-
-    }
-    .cards .pallete::-webkit-scrollbar{
-        width:3px;
-        height: 3px;
-    }
-    .cards .pallete::-webkit-scrollbar-thumb{
-        background-color: #333;
-    }
-
-    @media screen and (max-width:900px){
-        .cards .pallete{
-        height:350px;
-        overflow-y: scroll;
-
-    }
-    }
-
-    @media screen and (max-width:700px){
-        .cards .pallete{
-        height:400px;
-        overflow-y: scroll;
-
-    }
-    }
-
-    @media screen and (max-width:600px){
-        .cards .pallete{
-        height:250px;
-        overflow-y: scroll;
-
-    }
-    .cards .pallete::-webkit-scrollbar{
-        width:5px;
-        height: 5px;
-    }
-    .cards .pallete::-webkit-scrollbar-thumb{
-        color:transparent;
-        background-color:transparent;
-    }
-    }
-</style>
 <meta property="og:title" content="{{need.type|capfirst}} Providers" />
 <meta
 property="og:description"
