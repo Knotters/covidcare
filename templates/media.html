@@ -1,5 +1,13 @@
 {% extends 'index.html' %}
 {% load static %}
+{% block og %}
+<meta property="og:title" content="Media · {{appname}}" />
+<meta
+property="og:description"
+content="Media clips for information related to COVID-19."
+/>
+<meta property="og:site_name" content="Media · {{appname}}" />
+{% endblock %}
 {% block title %}<title>Media · {{appname}}</title>{% endblock %}
 {% block nav %}
 <nav class="w3-row sub-accent">

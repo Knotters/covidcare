@@ -1,11 +1,8 @@
 from django.http.response import Http404
 from django.shortcuts import HttpResponse
-from django.core.management import call_command
 from .models import NeedType, Lead, State, District
 from covid.renderer import renderView
-from django.contrib.auth.decorators import user_passes_test
 import gspread
-from gspread.models import Worksheet
 from covid import env
 from fuzzywuzzy import process
 
@@ -37,39 +34,58 @@ def index(request):
 
 def needs(request, need=None):
     try:
+        itemFrom = int(request.POST['from'])-1
+        itemTo = int(request.POST['till'])
+        if itemTo < 10:
+            itemTo = 10
+    except:
+        itemFrom = 0
+        itemTo = 10
+    try:
         needobj = NeedType.objects.get(id=need)
-        states = State.objects.all()
+        states = []
         districts = []
-        try:
-            resources = Lead.objects.filter(needtype=needobj)
-        except:
-            resources = []
+        resources = []
         try:
             statename = str(request.GET['state'])
             state = State.objects.get(name=statename)
             districts = District.objects.filter(state=state)
-            resources = resources.filter(state=state)
         except:
+            states = State.objects.all()
             state = None
-        try:
-            distname = str(request.GET['district'])
-            if state:
-                district = District.objects.get(name=distname, state=state)
-            else:
-                district = District.objects.get(name=distname)
-            if district:
-                resources = resources.filter(district=district)
-        except:
-            district = None
 
-        return renderView(request, 'leads.html', {
+        district = None
+        if state:
+            try:
+                distname = str(request.GET['district'])
+                district = District.objects.get(name=distname, state=state)
+            except:
+                district = None
+
+        if district:
+            resources = Lead.objects.filter(needtype=needobj,state=state,district=district)[itemFrom:itemTo]
+            totalleads = Lead.objects.filter(needtype=needobj,state=state,district=district).count()
+        elif state:
+            resources = Lead.objects.filter(needtype=needobj,state=state)[itemFrom:itemTo]
+            totalleads = Lead.objects.filter(needtype=needobj,state=state).count()
+        else:
+            resources = Lead.objects.filter(needtype=needobj)[itemFrom:itemTo]
+            totalleads = Lead.objects.filter(needtype=needobj).count()
+        
+        if itemTo > totalleads:
+            itemTo = totalleads
+        data = {
             'leads': resources,
             'need': needobj,
             "states": states,
             "districts": districts,
             "state": state,
-            "district": district
-        })
+            "district": district,
+            "from":itemFrom+1,
+            "till":itemTo,
+            "totalleads": totalleads
+        }
+        return renderView(request, 'leads.html', data)
     except:
         raise Http404()
 
@@ -91,7 +107,7 @@ def addLeads(request):
         for need in need_types:
             try:
                 Worksheet = sh.worksheet(need.type.capitalize())
-                print(f"Worksheet found: {need.type}")
+                output_list.append(f"Worksheet found: {need.type}")
             except:
                 output_list.append(f"Worksheet not found: {need.type}")
                 continue
