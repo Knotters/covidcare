@@ -5,7 +5,7 @@ from .models import *
 admin.site.register(NeedType)
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
-    list_filter = ["needtype","provider"]
+    list_filter = ["needtype","state"]
     list_display = ["provider", "needtype","name", "state","getDistrict"]
 
     def getDistrict(self,obj):

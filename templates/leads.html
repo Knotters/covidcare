@@ -64,18 +64,23 @@ content="{{need.about}}"
     {% for lead in leads %}
     <div class="w3-col w3-quarter w3-padding cards">
         <div class="pallete primary" style="display: flex; flex-direction: column;justify-content: space-evenly;">
+            {% if lead.provider %}
             <h3>{{lead.provider}}</h3>
-            {% if lead.name %}
             <h6>{{lead.name}}</h6>
+            {% else %}
+                {% if lead.name %}
+                <h3>{{lead.name}}</h3>
+                {% endif %}
             {% endif %}
             <div class="w3-row">
                 {% if lead.contact %}
-                {% if 'www' in lead.contact or 'http' in lead.contact %}
-                <a href="{{lead.contact}}">
-                {% else %}
-                <a href="tel:{{lead.contact}}">
-                {% endif %}
-                <button title="Contact" class="sub-accent"><i class="material-icons">call</i>{{lead.contact}}</button></a><br/>
+                    {% if "www" in lead.contact or "http" in lead.contact %}
+                    <a target="_blank" rel="noreferrer" href="{{lead.contact}}"><button title="Contact" class="positive"><i class="material-icons">open_in_new</i>Website
+                    {% else %}
+                    <a href="tel:{{lead.contact}}"><button title="Contact" class="sub-accent"><i class="material-icons">call</i>{{lead.contact}}
+                    {% endif %}
+                    </button>
+                    </a><br/>
                 {% endif %}
                 {% if lead.address %}
                 <a target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/{{lead.address}}+{{lead.state.name}}"><button title="Location" class="accent"><i class="material-icons">place</i>{{lead.address}}</button></a><br/>
