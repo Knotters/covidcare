@@ -1,4 +1,4 @@
-# Covid Help
+# Covid Care
 
 Covid pandemic related help resources for people in need.
 
