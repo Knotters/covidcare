@@ -2,7 +2,7 @@ from django.http.response import Http404
 from django.shortcuts import HttpResponse
 from .models import NeedType, Lead, State, District
 from covid.renderer import renderView
-import gspread
+import gspread,json
 from covid import env
 from fuzzywuzzy import process
 
@@ -222,3 +222,9 @@ def addLeads(request):
     response = ",".join(i for i in output_list)
     print(*(response.split(",")),sep="\n")
     return HttpResponse(response)
+
+
+def fetchState(request):
+    state = list(State.objects.values_list("name",flat=True))
+    print(state)
+    return HttpResponse(json.dumps(state))
