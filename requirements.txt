@@ -37,4 +37,4 @@ six==1.16.0
 schedule
 sqlparse==0.2.4
 uritemplate==3.0.1
-urllib3==1.26.4
+urllib3==1.26.5
