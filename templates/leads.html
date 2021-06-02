@@ -39,9 +39,6 @@ content="{{need.about}}"
      {% endif %}
       required />
     <datalist id="states">
-    {% for state in states %}
-    <option value="{{state.name|capfirst}}">
-    {% endfor %}
     </datalist>
     {% if state %}
     <input list="districts" name="district" id="districtselected" placeholder="Choose district"
@@ -135,4 +132,6 @@ content="{{need.about}}"
 </div>
 {% endif %}
 {% endif %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'scripts/utilities.js' %}"></script>
 {% endblock %}
