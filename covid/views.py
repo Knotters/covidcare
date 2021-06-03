@@ -1,6 +1,5 @@
-from covid.decorators import superlogin
 from .renderer import renderView
-from django.contrib.auth.models import User
+from django.http.response import Http404
 from needs.models import *
 
 
@@ -42,6 +41,5 @@ def mediaclips(request):
     })
 
 
-@superlogin
 def volunteer(request):
-    return renderView(request, 'volunteer.html')
+    raise Http404()

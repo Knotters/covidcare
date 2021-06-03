@@ -8,6 +8,7 @@ on:
       - "README.md"
       - "CONTRIBUTING.md"
       - "covid/.env.example"
+      - "/**/*.json"
 
 jobs:
   testing:
@@ -38,10 +39,6 @@ jobs:
         echo "DBLINK=${{ secrets.DBLINK }}" >> covid/.env
         echo "DBUSER=${{ secrets.DBUSER }}" >> covid/.env
         echo "DBPASS=${{ secrets.DBPASS }}" >> covid/.env
-        echo "SUPDBNAME=${{ secrets.SUPDBNAME }}" >> covid/.env
-        echo "SUPDBLINK=${{ secrets.SUPDBLINK }}" >> covid/.env
-        echo "SUPDBUSER=${{ secrets.SUPDBUSER }}" >> covid/.env
-        echo "SUPDBPASS=${{ secrets.SUPDBPASS }}" >> covid/.env
         echo "MAILUSER=${{ secrets.MAILUSER }}" >> covid/.env
         echo "MAILPASS=${{ secrets.MAILPASS }}" >> covid/.env
         echo "ADMINPATH=${{ secrets.ADMINPATH }}" >> covid/.env

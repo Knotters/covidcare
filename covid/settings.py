@@ -1,5 +1,4 @@
 from pathlib import Path
-import platform
 import os
 from . import env
 
@@ -67,16 +66,6 @@ if not DEBUG:
                 'password': env.DBPASS,
                 'authMechanism': 'SCRAM-SHA-1'
             },
-        },
-        'super': {
-            'ENGINE': 'djongo',
-            'CLIENT': {
-                'name': env.SUPDBNAME,
-                'host': env.SUPDBLINK,
-                'username': env.SUPDBUSER,
-                'password': env.SUPDBPASS,
-                'authMechanism': 'SCRAM-SHA-1'
-            },
         }
     }
 else:
@@ -86,13 +75,6 @@ else:
             'NAME': env.DBNAME,
             'CLIENT': {
                 'host': env.DBLINK,
-            }
-        },
-        'super': {
-            'ENGINE': 'djongo',
-            'NAME': env.SUPDBNAME,
-            'CLIENT': {
-                'host': env.SUPDBLINK,
             }
         }
     }
@@ -114,7 +96,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 

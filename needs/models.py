@@ -1,5 +1,4 @@
 import uuid
-from uuid import uuid4
 from django.db import models
 from datetime import datetime
 
@@ -32,8 +31,11 @@ class NeedType(models.Model):
     type = models.CharField(max_length=50)
     about = models.CharField(
         max_length=100, default='Browse sources including volunteer verified ones.')
-    image = models.FileField(upload_to=needTypeImgPath,null=True, blank=True, max_length=500)
-    mapsrc = models.CharField(max_length=2000,blank=True, null=True,default="")
+    image = models.FileField(upload_to=needTypeImgPath,
+                             null=True, blank=True, max_length=500)
+    mapsrc = models.CharField(
+        max_length=2000, blank=True, null=True, default="")
+
     def __str__(self):
         return self.type
 
@@ -41,13 +43,15 @@ class NeedType(models.Model):
 class Lead(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     needtype = models.ForeignKey(NeedType, on_delete=models.CASCADE)
-    name = models.CharField(max_length=1000,blank=True)
-    provider = models.CharField(max_length=1000,blank=True)
+    name = models.CharField(max_length=1000, blank=True)
+    provider = models.CharField(max_length=1000, blank=True)
     contact = models.CharField(max_length=1000, null=False, blank=False)
-    address = models.CharField(max_length=2000, default='N/A',blank=True)
-    district = models.ForeignKey(District, on_delete=models.CASCADE,blank=True,null=True,default="")
-    state = models.ForeignKey(State, on_delete=models.CASCADE,blank=True)
+    address = models.CharField(max_length=2000, default='N/A', blank=True)
+    district = models.ForeignKey(
+        District, on_delete=models.CASCADE, blank=True, null=True, default="")
+    state = models.ForeignKey(State, on_delete=models.CASCADE, blank=True)
     lastupdate = models.DateTimeField(default=datetime.now())
+
     def __str__(self):
         return f'{self.provider} for {self.needtype}'
 
@@ -60,13 +64,15 @@ class Alert(models.Model):
     def __str__(self):
         return self.msg
 
+
 class Phoneline(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     text = models.CharField(max_length=1000)
     number = models.CharField(max_length=100)
-    
+
     def __str__(self):
         return self.text
+
 
 class Latest(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -97,7 +103,3 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
-
-
-
-
