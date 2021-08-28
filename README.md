@@ -2,8 +2,6 @@
 
 Covid pandemic related help resources for people in need.
 
-[![CovidCare Django CI](https://github.com/Knotters/covidcare/actions/workflows/main.yml/badge.svg)](https://github.com/Knotters/covidcare/actions/workflows/main.yml)
-
 ## Setup
 
 Built & Tested on Python v3.9.
@@ -56,4 +54,3 @@ Test files are located in folder of each application in this django project.
 py manage.py test
 ```
 
-This command is also used to test the code before deployment on CI, so it would be better that you run this command locally beforehand, than waiting for the CI workflow to fail for you just in case.
