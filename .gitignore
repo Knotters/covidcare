@@ -17,3 +17,4 @@ media/
 cred/
 static/admin/
 scheduler.py
+runserver.py

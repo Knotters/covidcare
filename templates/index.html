@@ -30,19 +30,19 @@
         />
         <meta property="og:type" content="tools" />
         {% block og %}
-        <meta property="og:title" content="{{appname}}" />
+        <meta property="og:title" content="{{appname}} by Knotters" />
         <meta
         property="og:description"
         content="{{description}}"
         />
-        <meta property="og:site_name" content="{{appname}}" />
+        <meta property="og:site_name" content="{{appname}} by Knotters" />
         {% endblock %}
         <meta name="author" content="Knotters Community">
         <meta
         name="favicon"
         content="{{site}}/static/graphics/icon.png"
         />
-        <meta name="twitter:title" content="{{appname}}" />
+        <meta name="twitter:title" content="{{appname}} by Knotters" />
         <meta
         name="twitter:description"
         content="{{description}}"
@@ -74,17 +74,20 @@
         <link rel="icon" href="{% static 'graphics/icon.svg' %}">
         <link rel="stylesheet" href="{% static 'styles/index.css' %}">
 
-        {% block title %}<title>{{appname}}</title>{% endblock %}
+        {% block title %}<title>{{appname}} by Knotters</title>{% endblock %}
     </head>
     <body>
         {% block nav %}
         <nav class="w3-row">
-            <span class="w3-left w3-padding-small"><h3>{{appname}}</h3></span>
+            <span class="w3-left"><h3>{{appname}}</h3></span>
             <span class="w3-right w3-row w3-padding">
                 <a target="_blank" rel="noreferrer" href="{{superdom}}"><button class="secondary"><img src="{{superdom}}/static/graphics/self/icon.svg" width="25">Knotters</button></a>
             </span>
         </nav>
         {% endblock %}
+	<div class="w3-row secondary w3-padding-small w3-center">
+		The sources are not being updated and checked currently.
+	</div>
         {% block content %}
         <div class="w3-row w3-padding accent">
           <marquee behaviour=alternate>
@@ -192,6 +195,7 @@
         {% block footer %}
         <footer class="w3-row secondary w3-padding" style="min-height: 50vh;">
             <br/><br/>
+		<div class="w3-row">
             <div class="w3-col w3-half primary-text w3-padding">
                 <a href="mailto:{{contactmail}}"><button class="primary"><i class="material-icons">mail</i>{{contactmail}}</button></a><br/><br/>
                 <a target="_blank" rel="noreferrer" href="https://github.com/Knotters"><button class="primary"><img src="{% static 'graphics/thirdparty/github-dark.png' %}" width="25" />Knotters</button></a><br/><br/>
@@ -208,6 +212,10 @@
                     <img class="w3-right" src="{{superdom}}/static/graphics/self/icon.svg" width="100" />
                 </div>
             </div>
+		</div>
+	    <div class="w3-row w3-padding-small w3-center">
+		The information & sources provided here are the sole responsibility of their respective providers. We do not take any responsibility of any fraudlent or incorrect info if provided here. However, we try our best to ensure that the information provided on this platform is authentic, but that doesn't guarantee it. Also, please keep in mind that some of the information could be outdated too (it might not have been at the time of sourcing).
+	   </div>
         </footer>
         {% endblock %}
     </body>
